@@ -56,13 +56,18 @@ if [ "${MACHINE}" == 'eagle' ] || \
     OS=darwin
   fi
 
+  THIS_REPO_DIR=..
+
   #All machines do this
-  (set -x; mkdir ${SPACK_ROOT}/etc/spack/${OS})
-  (set -x; cp base/*.yaml ${SPACK_ROOT}/etc/spack/)
-  (set -x; cp configs/${MACHINE}/packages.yaml ${SPACK_ROOT}/etc/spack/${OS}/)
-  (set -x; cp configs/${MACHINE}/config.yaml ${SPACK_ROOT}/etc/spack/${OS}/)
-  (set -x; cp configs/${MACHINE}/software/compilers.yaml ${SPACK_ROOT}/etc/spack/)
-  (set -x; cp configs/${MACHINE}/software/modules.yaml ${SPACK_ROOT}/etc/spack/)
+  (set -x; mkdir -p ${SPACK_ROOT}/etc/spack/${OS})
+  (set -x; cp ${THIS_REPO_DIR}/configs/base/*.yaml ${SPACK_ROOT}/etc/spack/)
+  (set -x; cp ${THIS_REPO_DIR}/configs/${MACHINE}/packages.yaml ${SPACK_ROOT}/etc/spack/${OS}/)
+  (set -x; cp ${THIS_REPO_DIR}/configs/${MACHINE}/config.yaml ${SPACK_ROOT}/etc/spack/${OS}/)
+
+  if [ "${MACHINE}" != 'mac' ]; then
+    (set -x; cp ${THIS_REPO_DIR}/configs/${MACHINE}/software/compilers.yaml ${SPACK_ROOT}/etc/spack/)
+    (set -x; cp ${THIS_REPO_DIR}/configs/${MACHINE}/software/modules.yaml ${SPACK_ROOT}/etc/spack/)
+  fi
 
 else
   printf "\nMachine name not found.\n"
