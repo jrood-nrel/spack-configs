@@ -1,0 +1,5 @@
+packages:
+  mesa:
+    variants: swr=avx2
+  fftw:
+    variants: simd=avx2
