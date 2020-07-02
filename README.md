@@ -1,4 +1,4 @@
-#Spack configuration files and scripts for use on machines at NREL
+# Spack configuration files and scripts for use on machines at NREL
 
 These software installations are maintained by Jon Rood for the HPACF group at NREL and are tailored to the applications our group develops. They are open to anyone to use on our machines. The software installations are organized by date snapshots. The binaries, compilers, and utilties are not updated as often as the software modules, so dated symlinks might overlap multiple dates for those. However, each date snapshot of the modules should be able to stand on its own so that older snapshots can be purged safely over time.
 
@@ -10,8 +10,9 @@ These software installations are maintained by Jon Rood for the HPACF group at N
 
 Currently there is no perfect way to advertise deprecation or addition, and evolution of these modules. I have an MOTD you can cat in your login script to see updates. Generally the latest 4 sets of modules will likely be kept and new sets have been showing up around every 3 to 6 months.
 
-To use these modules you can add the following to your ~/.bashrc for example and choose the module set (date) you prefer, and the GCC or Intel compiled software modules:
+To use these modules you can add the following to your `~/.bashrc` for example and choose the module set (date) you prefer, and the GCC or Intel compiled software modules:
 
+```
 #------------------------------------------
 
 #MPICH 3.3.1
@@ -59,7 +60,8 @@ module load mpich
 #etc...
 
 #------------------------------------------
+```
 
 If `module avail` does not show the modules on Eagle, try removing the LMOD cache with `rm -rf ~/.lmod.d/.cache`
 
-Also included in this directory is a recommended Spack configurations you can use to build your own packages on the machines supported at NREL. Once you have SPACK_ROOT set you can run `/nopt/nrel/ecom/hpacf/spack-config/setup-spack.sh` which should copy the yaml files into your instance of Spack. Or you can copy the yaml files into your ~/.spack/ directory manually. `spack compilers` should then show you many available compilers. Source your Spack's setup-env.sh after you do the `module unuse ${MODULEPATH}` in your .bashrc so that your Spack instance will add its own module path to MODULEPATH. Remove ~/.spack/linux if it exists and `spack compilers` doesn't show you the updated list of compilers. The ~/.spack directory takes highest precendence in the Spack configuration.
+Also included in this directory is a recommended Spack configurations you can use to build your own packages on the machines supported at NREL. Once you have `SPACK_ROOT` set you can run `/nopt/nrel/ecom/hpacf/spack-config/setup-spack.sh` which should copy the yaml files into your instance of Spack. Or you can copy the yaml files into your `~/.spack/` directory manually. `spack compilers` should then show you many available compilers. Source your Spack's `setup-env.sh` after you do the `module unuse ${MODULEPATH}` in your `.bashrc` so that your Spack instance will add its own module path to MODULEPATH. Remove `~/.spack/linux` if it exists and `spack compilers` doesn't show you the updated list of compilers. The `~/.spack` directory takes highest precendence in the Spack configuration.

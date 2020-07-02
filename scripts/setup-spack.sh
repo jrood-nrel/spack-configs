@@ -58,10 +58,10 @@ if [ "${MACHINE}" == 'eagle' ] || \
 
   #All machines do this
   (set -x; mkdir ${SPACK_ROOT}/etc/spack/${OS})
-  (set -x; cp machines/base/*.yaml ${SPACK_ROOT}/etc/spack/)
-  (set -x; cp configs/machines/${MACHINE}/packages.yaml ${SPACK_ROOT}/etc/spack/${OS}/)
-  (set -x; cp configs/machines/${MACHINE}/software/compilers.yaml ${SPACK_ROOT}/etc/spack/)
-  (set -x; cp configs/machines/${MACHINE}/software/modules.yaml ${SPACK_ROOT}/etc/spack/)
+  (set -x; cp base/*.yaml ${SPACK_ROOT}/etc/spack/)
+  (set -x; cp configs/${MACHINE}/packages.yaml ${SPACK_ROOT}/etc/spack/${OS}/)
+  (set -x; cp configs/${MACHINE}/software/compilers.yaml ${SPACK_ROOT}/etc/spack/)
+  (set -x; cp configs/${MACHINE}/software/modules.yaml ${SPACK_ROOT}/etc/spack/)
 
 else
   printf "\nMachine name not found.\n"
