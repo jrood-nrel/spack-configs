@@ -1,0 +1,6 @@
+spack:
+  specs:
+    - matrix:
+        - [environment-modules, unzip, bc, patch, bzip2, flex, flex@2.5.39, bison, curl, wget, cmake, emacs, vim, git, tmux, screen, global, python@2.7.18, python@3.8.3, htop, makedepend, cppcheck, texinfo, stow, zsh, strace, gdb, rsync, xterm, ninja, pkg-config, texlive scheme=full, image-magick, libxml2+python, gnuplot+wx, gnutls, likwid]
+        - ['%gcc']
+  view: False

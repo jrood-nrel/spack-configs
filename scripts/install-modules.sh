@@ -1,23 +1,22 @@
 #!/bin/bash -l
 
-# Script for installation of ECP related compilers, utilities, and software on Eagle and Rhodes
+# Script for installation of HPACF group related compilers, utilities, and software on Eagle and Rhodes.
+# The idea of this script requires running each TYPE stage and manually intervening after stage to set
+# up for the next stage by editing the yaml files used in the next stage.
 
+TYPE=base
 #TYPE=compilers
 #TYPE=utilities
-TYPE=software
+#TYPE=software
 
-DATE=2019-10-08
+DATE=2020-07-02
 
 set -e
 
-# Control over printing and executing commands
-print_cmds=true
-execute_cmds=true
-
 # Function for printing and executing commands
 cmd() {
-  if ${print_cmds}; then echo "+ $@"; fi
-  if ${execute_cmds}; then eval "$@"; fi
+  echo "+ $@";
+  eval "$@";
 }
 
 printf "============================================================\n"
@@ -50,18 +49,18 @@ fi
 
 INSTALL_DIR=${BASE_DIR}/${TYPE}/${DATE}
 
-if [ "${TYPE}" == 'compilers' ] || [ "${TYPE}" == 'utilities' ]; then
+if [ "${TYPE}" == 'base' ]; then
   GCC_COMPILER_VERSION="4.8.5"
-elif [ "${TYPE}" == 'software' ]; then
-  GCC_COMPILER_VERSION="7.4.0"
+if [ "${TYPE}" == 'compilers' ] || [ "${TYPE}" == 'utilities' ] || [ "${TYPE}" == 'software' ]; then
+  GCC_COMPILER_VERSION="9.3.0"
 fi
 GCC_COMPILER_MODULE="gcc/${GCC_COMPILER_VERSION}"
-INTEL_COMPILER_VERSION="18.0.4"
-INTEL_COMPILER_MODULE="intel-parallel-studio/cluster.2018.4"
-CLANG_COMPILER_VERSION="7.0.1"
+INTEL_COMPILER_VERSION="19.0.5"
+INTEL_COMPILER_MODULE="intel-parallel-studio/cluster.2019.5"
+CLANG_COMPILER_VERSION="10.0.0"
 CLANG_COMPILER_MODULE="llvm/${CLANG_COMPILER_VERSION}"
 
-BUILD_TEST_DIR=$(pwd)/..
+THIS_REPO_DIR=$(pwd)/..
 
 # Set spack location
 export SPACK_ROOT=${INSTALL_DIR}/spack
@@ -79,9 +78,9 @@ if [ ! -d "${INSTALL_DIR}" ]; then
   cmd "git clone https://github.com/spack/spack.git ${SPACK_ROOT}"
 
   printf "\nConfiguring Spack...\n"
-  cmd "cd ${BUILD_TEST_DIR}/configs && ./setup-spack.sh"
-  cmd "cp ${BUILD_TEST_DIR}/configs/machines/${MACHINE}/compilers.yaml.${TYPE} ${SPACK_ROOT}/etc/spack/compilers.yaml"
-  cmd "cp ${BUILD_TEST_DIR}/configs/machines/${MACHINE}/modules.yaml.${TYPE} ${SPACK_ROOT}/etc/spack/modules.yaml"
+  cmd "cd ${THIS_REPO_DIR}/scripts && ./setup-spack.sh"
+  cmd "cp ${THIS_REPO_DIR}/configs/${MACHINE}/${TYPE}/compilers.yaml ${SPACK_ROOT}/etc/spack/"
+  cmd "cp ${THIS_REPO_DIR}/configs/${MACHINE}/${TYPE}/modules.yaml ${SPACK_ROOT}/etc/spack/"
   cmd "mkdir -p ${SPACK_ROOT}/etc/spack/licenses/intel"
   cmd "cp ${HOME}/save/license.lic ${SPACK_ROOT}/etc/spack/licenses/intel/"
 
@@ -93,125 +92,35 @@ fi
 printf "\nLoading Spack...\n"
 cmd "source ${SPACK_ROOT}/share/spack/setup-env.sh"
 
-for COMPILER_NAME in gcc clang intel
-do
-  if [ ${COMPILER_NAME} == 'gcc' ]; then
-    COMPILER_VERSION="${GCC_COMPILER_VERSION}"
-  elif [ ${COMPILER_NAME} == 'intel' ]; then
-    COMPILER_VERSION="${INTEL_COMPILER_VERSION}"
-  elif [ ${COMPILER_NAME} == 'clang' ]; then
-    COMPILER_VERSION="${CLANG_COMPILER_VERSION}"
-  fi
-
-  COMPILER_ID="${COMPILER_NAME}@${COMPILER_VERSION}"
-
-  # Reset TRILINOS_PERCEPT variable
-  cmd "source ${BUILD_TEST_DIR}/configs/shared-constraints.sh"
-
-  # Load necessary modules
-  printf "\nLoading modules...\n"
-  cmd "module purge"
-  cmd "module unuse ${MODULEPATH}"
-  if [ "${TYPE}" == 'compilers' ] || [ "${TYPE}" == 'utilities' ]; then
-    cmd "module use ${BASE_DIR}/utilities/modules"
-  elif [ "${TYPE}" == 'software' ]; then
-    cmd "module use ${BASE_DIR}/compilers/modules-${DATE}"
-    cmd "module use ${BASE_DIR}/utilities/modules-${DATE}"
-    if [ ${COMPILER_NAME} == 'gcc' ]; then
-      cmd "module load ${GCC_COMPILER_MODULE}"
-    elif [ ${COMPILER_NAME} == 'intel' ]; then
-      cmd "module load ${GCC_COMPILER_MODULE}"
-      cmd "module load ${INTEL_COMPILER_MODULE}"
-    elif [ ${COMPILER_NAME} == 'clang' ]; then
-      cmd "module load ${CLANG_COMPILER_MODULE}"
-    fi
-  fi
-  #for MODULE in unzip patch bzip2 cmake git texinfo flex bison wget bc python; do
-  for MODULE in bzip2 cmake git texinfo flex bison wget python; do
+printf "\nLoading modules...\n"
+cmd "module purge"
+cmd "module unuse ${MODULEPATH}"
+if [ "${TYPE}" == 'compilers' ] || [ "${TYPE}" == 'utilities' ]; then
+  cmd "module use ${BASE_DIR}/base/modules"
+elif [ "${TYPE}" == 'software' ]; then
+  cmd "module use ${BASE_DIR}/compilers/modules-${DATE}"
+  cmd "module use ${BASE_DIR}/utilities/modules-${DATE}"
+  cmd "module load ${GCC_COMPILER_MODULE}"
+  cmd "module load ${INTEL_COMPILER_MODULE}"
+  cmd "module load ${CLANG_COMPILER_MODULE}"
+  for MODULE in unzip patch bzip2 cmake git texinfo flex bison wget bc python; do
     cmd "module load ${MODULE}"
   done
-  cmd "source ${SPACK_ROOT}/share/spack/setup-env.sh"
-  cmd "module list"
+fi
 
-  if [ "${MACHINE}" == 'eagle' ]; then
-    printf "\nMaking and setting TMPDIR to disk...\n"
-    cmd "mkdir -p /scratch/${USER}/.tmp"
-    cmd "export TMPDIR=/scratch/${USER}/.tmp"
-  fi
+cmd "source ${SPACK_ROOT}/share/spack/setup-env.sh"
 
-  if [ "${TYPE}" == 'compilers' ]; then
-    if [ ${COMPILER_NAME} == 'gcc' ]; then
-      printf "\nInstalling ${TYPE} using ${COMPILER_ID}...\n"
-      # LLVM 8 requires > GCC 4 and we currently build the compilers with the system GCC 4.8.5
-      for PACKAGE in binutils gcc@9.1.0 gcc@8.3.0 gcc@7.4.0 gcc@6.5.0 gcc@5.5.0 gcc@4.9.4 gcc@4.8.5 llvm@7.0.1+omp_tsan llvm@6.0.1+omp_tsan pgi@19.4+nvidia pgi@18.10+nvidia numactl; do
-        cmd "spack install ${PACKAGE} %${COMPILER_ID}"
-      done
-      cmd "spack install intel-parallel-studio@cluster.2019.3+advisor+inspector+mkl+mpi+vtune %${COMPILER_ID}"
-      cmd "spack install intel-parallel-studio@cluster.2018.4+advisor+inspector+mkl+mpi+vtune %${COMPILER_ID}"
-      cmd "spack install intel-parallel-studio@cluster.2017.7+advisor+inspector+mkl+mpi+vtune %${COMPILER_ID}"
-    fi
-  elif [ "${TYPE}" == 'utilities' ]; then
-    if [ ${COMPILER_NAME} == 'gcc' ]; then
-      printf "\nInstalling ${TYPE} using ${COMPILER_ID}...\n"
-      for PACKAGE in environment-modules unzip bc patch bzip2 flex bison curl wget cmake emacs vim git tmux screen global python@2.7.16 python@3.7.3 htop makedepend cppcheck texinfo stow zsh strace gdb rsync xterm ninja@kitware pkg-config; do
-        cmd "spack install ${PACKAGE} %${COMPILER_ID}"
-      done
-      cmd "spack install texlive scheme=full %${COMPILER_ID}"
-      # Remove gtkplus dependency from ghostscript
-      cmd "spack install image-magick %${COMPILER_ID}"
-      cmd "spack install libxml2+python %${COMPILER_ID}"
-      #cmd "spack install gnuplot+X ^pango+X %${COMPILER_ID}"
-      cmd "spack install gnuplot+wx ^pango+X %${COMPILER_ID}"
-      cmd "module load texinfo"
-      cmd "module load texlive"
-      cmd "module load flex"
-      cmd "spack install flex@2.5.39 %${COMPILER_ID}"
-      (set -x; spack install gnutls %${COMPILER_ID} ^/$(spack --color never find -L autoconf %${COMPILER_ID} | grep autoconf | cut -d " " -f1))
-      if [ "${MACHINE}" != 'rhodes' ]; then
-        cmd "spack install likwid %${COMPILER_ID}"
-      fi
-    fi
-  elif [ "${TYPE}" == 'software' ]; then
-    if [ ${COMPILER_NAME} == 'gcc' ]; then
-      printf "\nInstalling ${TYPE} using ${COMPILER_ID}...\n"
-      cmd "spack install osu-micro-benchmarks %${COMPILER_ID}"
-      for PYTHON_VERSION in '3.7.4'; do
-        cmd "spack install python@${PYTHON_VERSION} %${COMPILER_ID}"
-        for PYTHON_LIBRARY in py-numpy py-matplotlib py-pandas py-nose py-autopep8 py-flake8 py-jedi py-pip py-pyyaml py-rope py-seaborn py-sphinx py-yapf py-scipy py-yt~astropy; do
-          cmd "spack install ${PYTHON_LIBRARY} ^python@${PYTHON_VERSION} %${COMPILER_ID}"
-        done
-      done
-      cmd "spack install --only dependencies nalu-wind+openfast+tioga+hypre+fftw+catalyst %${COMPILER_ID} ^python@3.7.4 ^llvm@8.0.0+omp_tsan"
-      (set -x; spack install netcdf-fortran@4.4.3 %${COMPILER_ID} ^/$(spack --color never find -L netcdf@4.6.1 %${COMPILER_ID} ^hdf5+cxx+hl | grep netcdf | cut -d " " -f1))
-      cmd "spack install percept %${COMPILER_ID}"
-      cmd "spack install masa %${COMPILER_ID}"
-      cmd "spack install valgrind %${COMPILER_ID}"
-      if [ "${MACHINE}" == 'eagle' ]; then
-        cmd "spack install amrvis+mpi dims=3 %${COMPILER_ID}"
-        cmd "spack install amrvis+mpi+profiling dims=2 %${COMPILER_ID}"
-        cmd "spack install cuda@10.1.168 %${COMPILER_ID}"
-        cmd "spack install cuda@10.0.130 %${COMPILER_ID}"
-        cmd "spack install cuda@9.2.88 %${COMPILER_ID}"
-        cmd "spack install cudnn@7.5.1-10.1-x86_64 %${COMPILER_ID}"
-        cmd "spack install libfabric %${COMPILER_ID}"
-      fi
-      #cmd "spack install paraview+mpi+python+osmesa %${COMPILER_ID}"
-      #cmd "spack install petsc %${COMPILER_ID}"
-    elif [ ${COMPILER_NAME} == 'intel' ]; then
-      printf "\nInstalling ${TYPE} using ${COMPILER_ID}...\n"
-      cmd "spack install --only dependencies nalu-wind+openfast+tioga+hypre+fftw %${COMPILER_ID} ^intel-mpi ^intel-mkl"
-      cmd "spack install osu-micro-benchmarks %${COMPILER_ID} ^intel-mpi"
-    elif [ ${COMPILER_NAME} == 'clang' ]; then
-      printf "\nInstalling ${TYPE} using ${COMPILER_ID}...\n"
-      cmd "spack install --only dependencies nalu-wind+openfast+tioga+hypre+fftw %${COMPILER_ID}"
-      cmd "spack install osu-micro-benchmarks %${COMPILER_ID}"
-    fi
-  fi
+if [ "${MACHINE}" == 'eagle' ]; then
+  printf "\nMaking and setting TMPDIR to disk...\n"
+  cmd "mkdir -p /scratch/${USER}/.tmp"
+  cmd "export TMPDIR=/scratch/${USER}/.tmp"
+fi
 
-  cmd "unset TMPDIR"
+printf "\nInstalling ${TYPE}...\n"
 
-  printf "\nDone installing ${TYPE} with ${COMPILER_ID} at $(date).\n"
-done
+cmd "spack install -f ${THIS_REPO_DIR}/configs/${MACHINE}/${TYPE}/spack.yaml"
+
+printf "\nDone installing ${TYPE} at $(date).\n"
 
 printf "\nSetting permissions...\n"
 if [ "${MACHINE}" == 'eagle' ]; then

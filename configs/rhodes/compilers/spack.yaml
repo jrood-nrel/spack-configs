@@ -1,0 +1,19 @@
+spack:
+  specs:
+    - binutils 
+    - gcc@10.1.0
+    - gcc@9.3.0
+    - gcc@8.4.0
+    - gcc@7.5.0
+    - gcc@6.5.0
+    - gcc@5.5.0
+    - gcc@4.9.4
+    - gcc@4.8.5
+    - llvm@10.0.0+omp_debug+omp_tsan+python
+    - llvm@9.0.1+omp_debug+omp_tsan+python
+    - llvm@8.0.0+omp_debug+omp_tsan+python
+    - intel-parallel-studio@cluster.2020.1+advisor+inspector+itac+mkl+mpi+vtune
+    - intel-parallel-studio@cluster.2019.5+advisor+inspector+itac+mkl+mpi+vtune
+    - intel-parallel-studio@cluster.2018.4+advisor+inspector+itac+mkl+mpi+vtune
+    #- pgi@19.10+nvidia
+  view: False

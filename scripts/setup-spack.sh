@@ -50,7 +50,7 @@ if [ "${MACHINE}" == 'eagle' ] || \
   printf "Machine is detected as ${MACHINE}.\n"
 
   #Extra stuff for eagle
-  if [ ${MACHINE} == 'eagle' || ${MACHINE} == 'rhodes' ]; then
+  if [ ${MACHINE} == 'eagle' ] || [ ${MACHINE} == 'rhodes' ]; then
     OS=linux
   elif [ "${MACHINE}" == 'mac' ]; then
     OS=darwin
@@ -60,6 +60,7 @@ if [ "${MACHINE}" == 'eagle' ] || \
   (set -x; mkdir ${SPACK_ROOT}/etc/spack/${OS})
   (set -x; cp base/*.yaml ${SPACK_ROOT}/etc/spack/)
   (set -x; cp configs/${MACHINE}/packages.yaml ${SPACK_ROOT}/etc/spack/${OS}/)
+  (set -x; cp configs/${MACHINE}/config.yaml ${SPACK_ROOT}/etc/spack/${OS}/)
   (set -x; cp configs/${MACHINE}/software/compilers.yaml ${SPACK_ROOT}/etc/spack/)
   (set -x; cp configs/${MACHINE}/software/modules.yaml ${SPACK_ROOT}/etc/spack/)
 
