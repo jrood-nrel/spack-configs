@@ -2,10 +2,6 @@ compilers:
 - compiler:
     environment: {}
     extra_rpaths: []
-    flags:
-      cflags: -O2
-      cxxflags: -O2
-      fflags: -O2
     modules: []
     operating_system: centos7
     paths:
