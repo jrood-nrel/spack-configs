@@ -9,7 +9,7 @@ TYPE=base
 #TYPE=utilities
 #TYPE=software
 
-DATE=2020-07-02
+DATE=2020-07-06
 
 set -e
 
@@ -118,7 +118,10 @@ fi
 
 printf "\nInstalling ${TYPE}...\n"
 
-cmd "spack install -f ${THIS_REPO_DIR}/configs/${MACHINE}/${TYPE}/spack.yaml"
+cmd "spack env create ${TYPE}"
+cmd "spack env activate ${TYPE}"
+cmd "cp ${THIS_REPO_DIR}/configs/${MACHINE}/${TYPE}/spack.yaml ${SPACK_ROOT}/var/spack/environments/${TYPE}/spack.yaml"
+cmd "spack concretize"
 
 printf "\nDone installing ${TYPE} at $(date).\n"
 
