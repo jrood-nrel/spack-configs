@@ -50,15 +50,15 @@ fi
 INSTALL_DIR=${BASE_DIR}/${TYPE}/${DATE}
 
 if [ "${TYPE}" == 'base' ]; then
-  GCC_COMPILER_VERSION="4.8.5"
-if [ "${TYPE}" == 'compilers' ] || [ "${TYPE}" == 'utilities' ] || [ "${TYPE}" == 'software' ]; then
-  GCC_COMPILER_VERSION="9.3.0"
+  GCC_COMPILER_VERSION=4.8.5
+elif [ "${TYPE}" == 'compilers' ] || [ "${TYPE}" == 'utilities' ] || [ "${TYPE}" == 'software' ]; then
+  GCC_COMPILER_VERSION=9.3.0
 fi
-GCC_COMPILER_MODULE="gcc/${GCC_COMPILER_VERSION}"
-INTEL_COMPILER_VERSION="19.0.5"
-INTEL_COMPILER_MODULE="intel-parallel-studio/cluster.2019.5"
-CLANG_COMPILER_VERSION="10.0.0"
-CLANG_COMPILER_MODULE="llvm/${CLANG_COMPILER_VERSION}"
+GCC_COMPILER_MODULE=gcc/${GCC_COMPILER_VERSION}
+INTEL_COMPILER_VERSION=19.0.5
+INTEL_COMPILER_MODULE=intel-parallel-studio/cluster.2019.5
+CLANG_COMPILER_VERSION=10.0.0
+CLANG_COMPILER_MODULE=llvm/${CLANG_COMPILER_VERSION}
 
 THIS_REPO_DIR=$(pwd)/..
 
@@ -97,6 +97,7 @@ cmd "module purge"
 cmd "module unuse ${MODULEPATH}"
 if [ "${TYPE}" == 'compilers' ] || [ "${TYPE}" == 'utilities' ]; then
   cmd "module use ${BASE_DIR}/base/modules"
+  cmd "module load ${GCC_COMPILER_MODULE}"
 elif [ "${TYPE}" == 'software' ]; then
   cmd "module use ${BASE_DIR}/compilers/modules-${DATE}"
   cmd "module use ${BASE_DIR}/utilities/modules-${DATE}"
