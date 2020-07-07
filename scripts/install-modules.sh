@@ -95,18 +95,18 @@ cmd "source ${SPACK_ROOT}/share/spack/setup-env.sh"
 printf "\nLoading modules...\n"
 cmd "module purge"
 cmd "module unuse ${MODULEPATH}"
+cmd "module use ${BASE_DIR}/utilities/modules"
+for MODULE in unzip patch bzip2 cmake git texinfo flex bison wget bc python; do
+  cmd "module load ${MODULE}"
+done
 if [ "${TYPE}" == 'compilers' ] || [ "${TYPE}" == 'utilities' ]; then
-  cmd "module use ${BASE_DIR}/base/modules"
+  cmd "module use ${BASE_DIR}/base/modules-${DATE}"
   cmd "module load ${GCC_COMPILER_MODULE}"
 elif [ "${TYPE}" == 'software' ]; then
   cmd "module use ${BASE_DIR}/compilers/modules-${DATE}"
-  cmd "module use ${BASE_DIR}/utilities/modules-${DATE}"
   cmd "module load ${GCC_COMPILER_MODULE}"
   cmd "module load ${INTEL_COMPILER_MODULE}"
   cmd "module load ${CLANG_COMPILER_MODULE}"
-  for MODULE in unzip patch bzip2 cmake git texinfo flex bison wget bc python; do
-    cmd "module load ${MODULE}"
-  done
 fi
 
 cmd "source ${SPACK_ROOT}/share/spack/setup-env.sh"
@@ -122,7 +122,7 @@ printf "\nInstalling ${TYPE}...\n"
 cmd "spack env create ${TYPE}"
 cmd "spack env activate ${TYPE}"
 cmd "cp ${THIS_REPO_DIR}/configs/${MACHINE}/${TYPE}/spack.yaml ${SPACK_ROOT}/var/spack/environments/${TYPE}/spack.yaml"
-cmd "spack concretize"
+cmd "spack install"
 
 printf "\nDone installing ${TYPE} at $(date).\n"
 
