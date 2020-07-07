@@ -7,16 +7,20 @@ packages:
     version: [3.17.3]
   fftw:
     variants: +fma
+  gcc:
+    variants: languages=c,c++,fortran,go
   hdf5:
     version: [1.10.4]
     variants: cxx+hl
   hypre:
     version: [develop]
     variants: +int64~superlu-dist
+  intel-parallel-studio:
+    variants: +advisor+inspector+itac+mkl+mpi+vtune
   libxml2:
     version: [2.9.8]
   llvm:
-    variants: +omp_tsan
+    variants: +omp_debug+omp_tsan+python
   netcdf-c:
     version: [4.7.3]
     variants: +parallel-netcdf maxdims=65536 maxvars=524288
