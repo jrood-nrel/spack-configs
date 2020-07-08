@@ -85,7 +85,6 @@ if [ ! -d "${INSTALL_DIR}" ]; then
   cmd "cp ${HOME}/save/license.lic ${SPACK_ROOT}/etc/spack/licenses/intel/"
   cmd "source ${SPACK_ROOT}/share/spack/setup-env.sh"
   cmd "spack env create ${TYPE}"
-  cmd "spack env activate ${TYPE}"
   cmd "cp ${THIS_REPO_DIR}/configs/${MACHINE}/${TYPE}/spack.yaml ${SPACK_ROOT}/var/spack/environments/${TYPE}/spack.yaml"
 
   printf "============================================================\n"
