@@ -100,7 +100,7 @@ printf "\nLoading modules...\n"
 cmd "module purge"
 cmd "module unuse ${MODULEPATH}"
 cmd "module use ${BASE_DIR}/utilities/modules"
-for MODULE in unzip patch bzip2 cmake git texinfo flex bison wget bc python; do
+for MODULE in unzip patch bzip2 cmake git texinfo bison wget bc python; do
   cmd "module load ${MODULE}"
 done
 if [ "${TYPE}" == 'compilers' ] || [ "${TYPE}" == 'utilities' ]; then
