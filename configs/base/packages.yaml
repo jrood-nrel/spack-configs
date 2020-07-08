@@ -1,6 +1,6 @@
 packages:
   binutils:
-    version: [2.32]
+    version: [2.34]
   boost:
     version: [1.68.0]
   cmake:

@@ -4,8 +4,8 @@
 # The idea of this script requires running each TYPE stage and manually intervening after stage to set
 # up for the next stage by editing the yaml files used in the next stage.
 
-TYPE=base
-#TYPE=compilers
+#TYPE=base
+TYPE=compilers
 #TYPE=utilities
 #TYPE=software
 
@@ -83,6 +83,9 @@ if [ ! -d "${INSTALL_DIR}" ]; then
   cmd "cp ${THIS_REPO_DIR}/configs/${MACHINE}/${TYPE}/modules.yaml ${SPACK_ROOT}/etc/spack/"
   cmd "mkdir -p ${SPACK_ROOT}/etc/spack/licenses/intel"
   cmd "cp ${HOME}/save/license.lic ${SPACK_ROOT}/etc/spack/licenses/intel/"
+  cmd "spack env create ${TYPE}"
+  cmd "spack env activate ${TYPE}"
+  cmd "cp ${THIS_REPO_DIR}/configs/${MACHINE}/${TYPE}/spack.yaml ${SPACK_ROOT}/var/spack/environments/${TYPE}/spack.yaml"
 
   printf "============================================================\n"
   printf "Done setting up install directory.\n"
@@ -119,9 +122,7 @@ fi
 
 printf "\nInstalling ${TYPE}...\n"
 
-cmd "spack env create ${TYPE}"
 cmd "spack env activate ${TYPE}"
-cmd "cp ${THIS_REPO_DIR}/configs/${MACHINE}/${TYPE}/spack.yaml ${SPACK_ROOT}/var/spack/environments/${TYPE}/spack.yaml"
 cmd "spack install"
 
 printf "\nDone installing ${TYPE} at $(date).\n"
