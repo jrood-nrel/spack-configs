@@ -83,6 +83,7 @@ if [ ! -d "${INSTALL_DIR}" ]; then
   cmd "cp ${THIS_REPO_DIR}/configs/${MACHINE}/${TYPE}/modules.yaml ${SPACK_ROOT}/etc/spack/"
   cmd "mkdir -p ${SPACK_ROOT}/etc/spack/licenses/intel"
   cmd "cp ${HOME}/save/license.lic ${SPACK_ROOT}/etc/spack/licenses/intel/"
+  cmd "source ${SPACK_ROOT}/share/spack/setup-env.sh"
   cmd "spack env create ${TYPE}"
   cmd "spack env activate ${TYPE}"
   cmd "cp ${THIS_REPO_DIR}/configs/${MACHINE}/${TYPE}/spack.yaml ${SPACK_ROOT}/var/spack/environments/${TYPE}/spack.yaml"
@@ -90,10 +91,10 @@ if [ ! -d "${INSTALL_DIR}" ]; then
   printf "============================================================\n"
   printf "Done setting up install directory.\n"
   printf "============================================================\n"
+else
+  printf "\nLoading Spack...\n"
+  cmd "source ${SPACK_ROOT}/share/spack/setup-env.sh"
 fi
-
-printf "\nLoading Spack...\n"
-cmd "source ${SPACK_ROOT}/share/spack/setup-env.sh"
 
 printf "\nLoading modules...\n"
 cmd "module purge"
