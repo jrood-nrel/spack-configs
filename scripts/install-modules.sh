@@ -4,12 +4,12 @@
 # The idea of this script requires running each TYPE stage and manually intervening after stage to set
 # up for the next stage by editing the yaml files used in the next stage.
 
-#TYPE=base
-TYPE=compilers
+TYPE=base
+#TYPE=compilers
 #TYPE=utilities
 #TYPE=software
 
-DATE=2020-07-06
+DATE=2020-07
 
 set -e
 
