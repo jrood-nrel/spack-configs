@@ -51,8 +51,10 @@ INSTALL_DIR=${BASE_DIR}/${TYPE}/${DATE}
 
 if [ "${TYPE}" == 'base' ]; then
   GCC_COMPILER_VERSION=4.8.5
+  CPU_OPT=haswell
 elif [ "${TYPE}" == 'compilers' ] || [ "${TYPE}" == 'utilities' ] || [ "${TYPE}" == 'software' ]; then
   GCC_COMPILER_VERSION=9.3.0
+  CPU_OPT=broadwell
 fi
 GCC_COMPILER_MODULE=gcc/${GCC_COMPILER_VERSION}
 INTEL_COMPILER_VERSION=19.0.5
@@ -132,6 +134,9 @@ if [ "${MACHINE}" == 'eagle' ]; then
   cmd "chmod -R a+rX,go-w ${INSTALL_DIR}"
   cmd "chgrp -R n-ecom ${INSTALL_DIR}"
 elif [ "${MACHINE}" == 'rhodes' ]; then
+  cmd "cd /opt/${TYPE}"
+  cmd "ln -s ${DATE}/spack/share/spack/modules/linux-centos7-${CPU_OPT}/${GCC_COMPILER_VERSION} modules-${DATE}"
+  cmd "cd -"
   cmd "chgrp windsim /opt"
   cmd "chgrp windsim /opt/${TYPE}"
   cmd "chgrp -R windsim ${INSTALL_DIR}"
