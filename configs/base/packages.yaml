@@ -13,7 +13,7 @@ packages:
     version: [1.10.4]
     variants: cxx+hl
   hypre:
-    version: [develop]
+    version: [2.18.2]
     variants: +int64~superlu-dist
   intel-parallel-studio:
     variants: +advisor+inspector+itac+mkl+mpi+vtune
@@ -45,7 +45,7 @@ packages:
     version: [develop]
     variants: ~python~complex+explicit_template_instantiation~float~fortran~openmp~xsdkflags+boost~cgns+exodus+gtest+hdf5~hypre~metis~mumps+pnetcdf~suite-sparse~superlu-dist+superlu~x11+zlib~alloptpkgs~amesos+amesos2~anasazi~aztec+belos~epetra~epetraext~ifpack+ifpack2~intrepid~intrepid2~isorropia+kokkos~ml~minitensor+muelu~nox~piro~phalanx~rol~rythmos~sacado~shylu+stk+shards~teko~tempus+teuchos+tpetra+zoltan+zoltan2~dtk~fortrilinos build_type=Release
   all:
-    compiler: [gcc@9.3.0, intel@19.0.5, clang@10.0.0]
+    compiler: [apple-clang, gcc@9.3.0, intel, clang]
     variants: build_type=Release +mpi
     providers:
       mpi: [open-mpi, intel-mpi]
