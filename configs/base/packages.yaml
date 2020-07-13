@@ -1,4 +1,6 @@
 packages:
+  ascent:
+    variants: +python
   binutils:
     version: [2.34]
   boost:
@@ -21,6 +23,8 @@ packages:
     version: [2.9.8]
   llvm:
     variants: +omp_debug+omp_tsan+python
+  nalu-wind:
+    variants: +openfast+tioga+hypre+fftw
   netcdf-c:
     version: [4.7.3]
     variants: +parallel-netcdf maxdims=65536 maxvars=524288
@@ -29,6 +33,8 @@ packages:
     variants: +cxx
   openmpi:
     version: [4.0.4]
+  paraview:
+    variants: +mpi+python3+osmesa
   python:
     version: [3.7.7]
   mpich:
@@ -37,6 +43,8 @@ packages:
     version: [1.12.1]
   netlib-lapack:
     version: [3.8.0]
+  sensei:
+    variants: +catalyst+hdf5+libsim+python
   superlu:
     version: [4.3]
   tioga:
