@@ -18,7 +18,12 @@ packages:
     version: [2.18.2]
     variants: +int64~superlu-dist
   intel-parallel-studio:
-    variants: +advisor+inspector+itac+mkl+mpi+vtune
+    version: [cluster.2019.5]
+    variants: +advisor+inspector+itac+mkl+vtune
+  intel-mpi:
+    version: [2019.5.281]
+  intel-mkl:
+    version: [2019.5.281]
   libxml2:
     version: [2.9.8]
   llvm:
@@ -34,7 +39,7 @@ packages:
   openmpi:
     version: [4.0.4]
   paraview:
-    variants: +mpi+python3+osmesa
+    variants: +python3+osmesa
   python:
     version: [3.7.7]
   mpich:
