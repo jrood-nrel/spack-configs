@@ -7,14 +7,17 @@ spack:
   - py-nose
   - py-autopep8
   - py-flake8
+  - py-horovod
   - py-jedi
   - py-pip
   - py-pyyaml
   - py-seaborn
   - py-sphinx
-  - py-yapf
   - py-scipy
-  - py-yt~astropy
+  - py-tensorflow
+  - py-torch
+  - py-yapf
+  - py-yt
   - percept
   - masa
   - valgrind
@@ -25,6 +28,7 @@ spack:
   - paraview
   - nalu-wind+catalyst
   - netcdf-fortran
+  - sundials
   - nalu-wind~catalyst %intel
   - nalu-wind~catalyst %clang
   view: false

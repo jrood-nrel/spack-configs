@@ -42,6 +42,8 @@ packages:
     variants: +python3+osmesa
   python:
     version: [3.7.7]
+  py-yt:
+    variants: ~astropy
   mpich:
     version: [3.3.2]
   parallel-netcdf:
