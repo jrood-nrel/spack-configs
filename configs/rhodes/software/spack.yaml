@@ -1,9 +1,32 @@
 spack:
   specs:
-    - matrix:
-        - [osu-micro-benchmarks, py-numpy, py-matplotlib, py-pandas, py-nose, py-autopep8, py-flake8, py-jedi, py-pip, py-pyyaml, py-rope, py-seaborn, py-sphinx, py-yapf, py-scipy, py-yt~astropy, nalu-wind+openfast+tioga+hypre+fftw+catalyst, netcdf-fortran, percept, masa, valgrind, amrvis dims=3, amrvis+profiling dims=2, paraview+mpi+python3+osmesa, sensei+catalyst+hdf5+libsim+python, ascent+python+cuda cuda_arch=72]
-        - ['%gcc', '%intel-parallel-studio', '%clang']
-      exclude:
-        - 'paraview+mpi+python3+osmesa %intel-parallel-studio'
-        - 'paraview+mpi+python3+osmesa %clang'
+    - osu-micro-benchmarks
+    - py-numpy
+    - py-matplotlib
+    - py-pandas
+    - py-nose
+    - py-autopep8
+    - py-flake8
+    - py-jedi
+    - py-pip
+    - py-pyyaml
+    - py-seaborn
+    - py-sphinx
+    - py-yapf
+    - py-scipy
+    - py-yt~astropy
+    - percept
+    - masa
+    - valgrind
+    - amrvis dims=3
+    - amrvis+profiling dims=2
+    - paraview+mpi+python3+osmesa
+    - sensei+catalyst+hdf5+libsim+python
+    - ascent+python+cuda cuda_arch=72
+    - nalu-wind+openfast+tioga+hypre+fftw+catalyst
+    - netcdf-fortran
+    - nalu-wind+openfast+tioga+hypre+fftw~catalyst %intel-parallel-studio
+    - nalu-wind+openfast+tioga+hypre+fftw~catalyst %clang
+    - netcdf-fortran %intel-parallel-studio
+    - netcdf-fortran %clang
   view: False
