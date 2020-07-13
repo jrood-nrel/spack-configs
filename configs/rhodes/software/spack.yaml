@@ -1,32 +1,30 @@
 spack:
   specs:
-    - osu-micro-benchmarks
-    - py-numpy
-    - py-matplotlib
-    - py-pandas
-    - py-nose
-    - py-autopep8
-    - py-flake8
-    - py-jedi
-    - py-pip
-    - py-pyyaml
-    - py-seaborn
-    - py-sphinx
-    - py-yapf
-    - py-scipy
-    - py-yt~astropy
-    - percept
-    - masa
-    - valgrind
-    - amrvis dims=3
-    - amrvis+profiling dims=2
-    - paraview
-    - sensei
-    - ascent
-    - nalu-wind+catalyst
-    - netcdf-fortran
-    - nalu-wind~catalyst %intel-parallel-studio
-    - nalu-wind~catalyst %clang
-    - netcdf-fortran %intel-parallel-studio
-    - netcdf-fortran %clang
-  view: False
+  - osu-micro-benchmarks
+  - py-numpy
+  - py-matplotlib
+  - py-pandas
+  - py-nose
+  - py-autopep8
+  - py-flake8
+  - py-jedi
+  - py-pip
+  - py-pyyaml
+  - py-seaborn
+  - py-sphinx
+  - py-yapf
+  - py-scipy
+  - py-yt~astropy
+  - percept
+  - masa
+  - valgrind
+  - ascent
+  - sensei
+  - amrvis dims=3
+  - amrvis+profiling dims=2
+  - paraview
+  - nalu-wind+catalyst
+  - netcdf-fortran
+  - nalu-wind~catalyst %intel
+  - nalu-wind~catalyst %clang
+  view: false
