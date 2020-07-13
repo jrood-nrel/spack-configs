@@ -141,9 +141,7 @@ if [ "${MACHINE}" == 'eagle' ]; then
   cmd "chgrp -R n-ecom ${INSTALL_DIR}"
 elif [ "${MACHINE}" == 'rhodes' ]; then
   if [ "${TYPE}" != 'software' ]; then
-    cmd "cd /opt/${TYPE}"
-    cmd "ln -s ${DATE}/spack/share/spack/modules/linux-centos7-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} modules-${DATE}"
-    cmd "cd -"
+    cmd "cd /opt/${TYPE} && ln -s ${DATE}/spack/share/spack/modules/linux-centos7-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} modules-${DATE} && cd -"
   fi
   cmd "chgrp windsim /opt"
   cmd "chgrp windsim /opt/${TYPE}"
