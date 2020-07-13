@@ -20,13 +20,13 @@ spack:
     - valgrind
     - amrvis dims=3
     - amrvis+profiling dims=2
-    - paraview+mpi+python3+osmesa
-    - sensei+catalyst+hdf5+libsim+python
-    - ascent+python+cuda cuda_arch=72
-    - nalu-wind+openfast+tioga+hypre+fftw+catalyst
+    - paraview
+    - sensei
+    - ascent
+    - nalu-wind+catalyst
     - netcdf-fortran
-    - nalu-wind+openfast+tioga+hypre+fftw~catalyst %intel-parallel-studio
-    - nalu-wind+openfast+tioga+hypre+fftw~catalyst %clang
+    - nalu-wind~catalyst %intel-parallel-studio
+    - nalu-wind~catalyst %clang
     - netcdf-fortran %intel-parallel-studio
     - netcdf-fortran %clang
   view: False
