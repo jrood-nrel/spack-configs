@@ -1,6 +1,7 @@
 spack:
   specs:
     - matrix:
-        - [unzip, bc, patch, bzip2, flex, flex@2.5.39, bison, curl, wget, cmake, emacs, vim, git, tmux, screen, global, python, python@2.7.18, htop, makedepend, cppcheck, texinfo, stow, zsh, strace, gdb, rsync, xterm, ninja, pkg-config, texlive scheme=full, imagemagick, libxml2+python, gnuplot+wx, gnutls, likwid]
+        # Missing packages that have errors: global
+        - [unzip, bc, patch, bzip2, flex, flex@2.5.39, bison, curl, wget, cmake, emacs, vim, git, tmux, screen, python, python@2.7.18, htop, makedepend, cppcheck, texinfo, stow, zsh, strace, gdb, rsync, xterm, ninja, pkg-config, texlive scheme=full, imagemagick, libxml2+python, gnuplot+wx, gnutls, likwid]
         - ['%gcc']
   view: False
