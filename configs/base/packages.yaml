@@ -44,7 +44,7 @@ packages:
   netlib-lapack:
     version: [3.8.0]
   sensei:
-    variants: +catalyst+hdf5+libsim+python
+    variants: +catalyst+hdf5+python
   superlu:
     version: [4.3]
   tioga:
