@@ -63,7 +63,7 @@ packages:
     compiler: [apple-clang, gcc@9.3.0, intel, clang]
     variants: build_type=Release +mpi
     providers:
-      mpi: [open-mpi, intel-mpi]
+      mpi: [openmpi, intel-mpi]
       blas: [netlib-lapack, intel-mkl]
       lapack: [netlib-lapack, intel-mkl]
 
