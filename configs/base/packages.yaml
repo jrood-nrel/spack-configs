@@ -11,7 +11,7 @@ packages:
     variants: languages=c,c++,fortran,go
   hdf5:
     version: [1.10.4]
-    variants: cxx+hl
+    variants: +cxx+hl
   hypre:
     version: [2.18.2]
     variants: +int64~superlu-dist
