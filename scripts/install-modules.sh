@@ -112,9 +112,16 @@ printf "\nLoading modules...\n"
 cmd "module purge"
 cmd "module unuse ${MODULEPATH}"
 cmd "module use ${BASE_DIR}/utilities/modules"
-for MODULE in binutils unzip patch bzip2 cmake git texinfo bison wget bc python; do
-  cmd "module load ${MODULE}"
-done
+if [ "${MACHINE}" == 'eagle' ]; then
+  cmd "module use ${BASE_DIR}/compilers/modules"
+  for MODULE in binutils unzip bzip2 cmake git texinfo bison wget python; do
+    cmd "module load ${MODULE}"
+  done
+elif [ "${MACHINE}" == 'rhodes' ]; then
+  for MODULE in binutils unzip patch bzip2 cmake git texinfo bison wget bc python; do
+    cmd "module load ${MODULE}"
+  done
+fi
 if [ "${TYPE}" == 'compilers' ] || [ "${TYPE}" == 'utilities' ]; then
   if [ "${TYPE}" == 'utilities' ]; then
     cmd "module load flex texlive"

@@ -7,7 +7,7 @@ compilers:
     paths:
       cc: /usr/bin/gcc
       cxx: /usr/bin/g++
-      f77: /usr/bin/gfortran
-      fc: /usr/bin/gfortran
+      f77: 
+      fc: 
     spec: gcc@4.8.5
     target: x86_64
