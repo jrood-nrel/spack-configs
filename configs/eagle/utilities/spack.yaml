@@ -1,0 +1,39 @@
+spack:
+  specs:
+    - bc
+    - bison
+    - bzip2
+    - cmake
+    - cppcheck
+    - curl
+    - flex
+    - flex@2.5.39
+    - emacs
+    - git
+    - gdb
+    #- global
+    - gnuplot+wx
+    - gnutls
+    - htop
+    - imagemagick
+    - libxml2+python
+    - likwid
+    - ninja
+    - makedepend
+    - patch
+    - pkg-config
+    - python
+    - python@2.7.18
+    - rsync
+    - screen
+    - stow
+    - strace
+    - texinfo
+    - texlive scheme=full
+    - tmux
+    - unzip
+    - vim
+    - wget
+    - xterm
+    - zsh
+  view: False

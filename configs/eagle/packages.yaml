@@ -10,13 +10,13 @@ packages:
       cuda@10.1.168: /nopt/nrel/apps/cuda/10.1.168
       cuda@10.0.130: /nopt/nrel/apps/cuda/10.0.130
       cuda@9.2.88: /nopt/nrel/apps/cuda/9.2.88
-    buildable: False
+    #buildable: False
   openmpi:
     variants: +pmi +cuda fabrics=ucx schedulers=slurm legacylaunchers=true
   mpich:
     variants: netmod=ucx device=ch4 +slurm +hydra
-  hwloc:
-    variants: ~cuda ~nvml ~gl
+  #hwloc:
+  #  variants: ~cuda ~nvml ~gl
   fftw:
     variants: +mpi+fma simd=avx512
   libfabric:
