@@ -1,6 +1,8 @@
 packages:
   mesa:
     variants: swr=skx
+  llvm:
+    variants: +cuda cuda_arch=70
   slurm:
     paths:
       slurm@19.05.2: /nopt/slurm/current
@@ -21,3 +23,5 @@ packages:
     variants: +mpi+fma simd=avx512
   libfabric:
     variants: fabrics=verbs
+  pgi:
+    variants: +nvidia
