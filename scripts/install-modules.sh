@@ -4,9 +4,9 @@
 # The idea of this script requires running each TYPE stage and manually intervening after stage to set
 # up for the next stage by editing the yaml files used in the next stage.
 
-#TYPE=base
+TYPE=base
 #TYPE=compilers
-TYPE=utilities
+#TYPE=utilities
 #TYPE=software
 
 DATE=2020-07
@@ -51,10 +51,18 @@ INSTALL_DIR=${BASE_DIR}/${TYPE}/${DATE}
 
 if [ "${TYPE}" == 'base' ]; then
   GCC_COMPILER_VERSION=4.8.5
-  CPU_OPT=haswell
+  if [ "${MACHINE}" == 'eagle' ]; then
+    CPU_OPT=haswell
+  elif [ "${MACHINE}" == 'rhodes' ]; then
+    CPU_OPT=haswell
+  fi
 elif [ "${TYPE}" == 'compilers' ] || [ "${TYPE}" == 'utilities' ] || [ "${TYPE}" == 'software' ]; then
   GCC_COMPILER_VERSION=9.3.0
-  CPU_OPT=broadwell
+  if [ "${MACHINE}" == 'eagle' ]; then
+    CPU_OPT=skylake_avx512
+  elif [ "${MACHINE}" == 'rhodes' ]; then
+    CPU_OPT=broadwell
+  fi
 fi
 GCC_COMPILER_MODULE=gcc/${GCC_COMPILER_VERSION}
 INTEL_COMPILER_VERSION=19.0.5
@@ -131,7 +139,7 @@ fi
 printf "\nInstalling ${TYPE}...\n"
 
 cmd "spack env activate ${TYPE}"
-cmd "spack install"
+cmd "nice spack install"
 
 printf "\nDone installing ${TYPE} at $(date).\n"
 
