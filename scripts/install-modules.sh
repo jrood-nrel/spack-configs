@@ -57,7 +57,7 @@ if [ "${TYPE}" == 'base' ]; then
     CPU_OPT=haswell
   fi
 elif [ "${TYPE}" == 'compilers' ] || [ "${TYPE}" == 'utilities' ] || [ "${TYPE}" == 'software' ]; then
-  GCC_COMPILER_VERSION=9.3.0
+  GCC_COMPILER_VERSION=8.4.0
   if [ "${MACHINE}" == 'eagle' ]; then
     CPU_OPT=skylake_avx512
   elif [ "${MACHINE}" == 'rhodes' ]; then

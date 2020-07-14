@@ -20,4 +20,4 @@ modules:
         set:
           PGROUPD_LICENSE_FILE: '27001@license-1.hpc.nrel.gov'
     whitelist: ['cuda', 'gcc', 'go', 'llvm', 'intel-parallel-studio', 'binutils', 'pgi']
-    blacklist: ['%gcc@9.3.0']
+    blacklist: ['%gcc']

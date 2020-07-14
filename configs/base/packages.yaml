@@ -64,7 +64,7 @@ packages:
   zsh:
     version: [5.7.1]
   all:
-    compiler: [apple-clang, gcc@9.3.0, intel, clang]
+    compiler: [apple-clang, gcc@8.4.0, intel, clang]
     variants: build_type=Release +mpi
     providers:
       mpi: [openmpi, intel-mpi]

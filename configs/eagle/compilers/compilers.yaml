@@ -2,13 +2,13 @@ compilers:
 - compiler:
     environment: {}
     extra_rpaths:
-     - /nopt/nrel/ecom/hpacf/base/2020-07/spack/opt/spack/linux-centos7-haswell/gcc-4.8.5/gcc-9.3.0-tgwavcfbnjflkjnnuwm6bmwlrfgrcwyf/lib64
+     - /nopt/nrel/ecom/hpacf/base/2020-07/spack/opt/spack/linux-centos7-haswell/gcc-4.8.5/gcc-8.4.0-tgwavcfbnjflkjnnuwm6bmwlrfgrcwyf/lib64
     modules: []
     operating_system: centos7
     paths:
-      cc: /nopt/nrel/ecom/hpacf/base/2020-07/spack/opt/spack/linux-centos7-haswell/gcc-4.8.5/gcc-9.3.0-tgwavcfbnjflkjnnuwm6bmwlrfgrcwyf/bin/gcc
-      cxx: /nopt/nrel/ecom/hpacf/base/2020-07/spack/opt/spack/linux-centos7-haswell/gcc-4.8.5/gcc-9.3.0-tgwavcfbnjflkjnnuwm6bmwlrfgrcwyf/bin/g++
-      f77: /nopt/nrel/ecom/hpacf/base/2020-07/spack/opt/spack/linux-centos7-haswell/gcc-4.8.5/gcc-9.3.0-tgwavcfbnjflkjnnuwm6bmwlrfgrcwyf/bin/gfortran
-      fc: /nopt/nrel/ecom/hpacf/base/2020-07/spack/opt/spack/linux-centos7-haswell/gcc-4.8.5/gcc-9.3.0-tgwavcfbnjflkjnnuwm6bmwlrfgrcwyf/bin/gfortran
-    spec: gcc@9.3.0
+      cc: /nopt/nrel/ecom/hpacf/base/2020-07/spack/opt/spack/linux-centos7-haswell/gcc-4.8.5/gcc-8.4.0-tgwavcfbnjflkjnnuwm6bmwlrfgrcwyf/bin/gcc
+      cxx: /nopt/nrel/ecom/hpacf/base/2020-07/spack/opt/spack/linux-centos7-haswell/gcc-4.8.5/gcc-8.4.0-tgwavcfbnjflkjnnuwm6bmwlrfgrcwyf/bin/g++
+      f77: /nopt/nrel/ecom/hpacf/base/2020-07/spack/opt/spack/linux-centos7-haswell/gcc-4.8.5/gcc-8.4.0-tgwavcfbnjflkjnnuwm6bmwlrfgrcwyf/bin/gfortran
+      fc: /nopt/nrel/ecom/hpacf/base/2020-07/spack/opt/spack/linux-centos7-haswell/gcc-4.8.5/gcc-8.4.0-tgwavcfbnjflkjnnuwm6bmwlrfgrcwyf/bin/gfortran
+    spec: gcc@8.4.0
     target: x86_64
