@@ -4,8 +4,8 @@
 # The idea of this script requires running each TYPE stage and manually intervening after stage to set
 # up for the next stage by editing the yaml files used in the next stage.
 
-TYPE=base
-#TYPE=compilers
+#TYPE=base
+TYPE=compilers
 #TYPE=utilities
 #TYPE=software
 
@@ -114,11 +114,11 @@ cmd "module unuse ${MODULEPATH}"
 cmd "module use ${BASE_DIR}/utilities/modules"
 if [ "${MACHINE}" == 'eagle' ]; then
   cmd "module use ${BASE_DIR}/compilers/modules"
-  for MODULE in binutils unzip bzip2 cmake git texinfo bison wget python; do
+  for MODULE in binutils unzip bzip2 git texinfo bison wget python; do
     cmd "module load ${MODULE}"
   done
 elif [ "${MACHINE}" == 'rhodes' ]; then
-  for MODULE in binutils unzip patch bzip2 cmake git texinfo bison wget bc python; do
+  for MODULE in binutils unzip patch bzip2 git texinfo bison wget bc python; do
     cmd "module load ${MODULE}"
   done
 fi
@@ -150,14 +150,16 @@ cmd "nice spack install"
 
 printf "\nDone installing ${TYPE} at $(date).\n"
 
+printf "\nCreating dated modules symlink...\n"
+if [ "${TYPE}" != 'software' ]; then
+  cmd "cd ${INSTALL_DIR}/.. && ln -s ${DATE}/spack/share/spack/modules/linux-centos7-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} modules-${DATE} && cd -"
+fi
+
 printf "\nSetting permissions...\n"
 if [ "${MACHINE}" == 'eagle' ]; then
   cmd "chmod -R a+rX,go-w ${INSTALL_DIR}"
   cmd "chgrp -R n-ecom ${INSTALL_DIR}"
 elif [ "${MACHINE}" == 'rhodes' ]; then
-  if [ "${TYPE}" != 'software' ]; then
-    cmd "cd /opt/${TYPE} && ln -s ${DATE}/spack/share/spack/modules/linux-centos7-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} modules-${DATE} && cd -"
-  fi
   cmd "chgrp windsim /opt"
   cmd "chgrp windsim /opt/${TYPE}"
   cmd "chgrp -R windsim ${INSTALL_DIR}"
