@@ -136,6 +136,8 @@ elif [ "${TYPE}" == 'software' ]; then
 fi
 
 cmd "source ${SPACK_ROOT}/share/spack/setup-env.sh"
+cmd "spack compilers"
+cmd "spack arch"
 
 if [ "${MACHINE}" == 'eagle' ]; then
   printf "\nMaking and setting TMPDIR to disk...\n"
