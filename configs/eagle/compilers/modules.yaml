@@ -11,6 +11,9 @@ modules:
       environment:
         set:
           '${PACKAGE}_ROOT_DIR': '${PREFIX}'
+    cuda:
+      filter:
+        environment_blacklist: ['CUDAHOSTCXX']
     intel-parallel-studio:
       environment:
         set:
