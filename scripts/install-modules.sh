@@ -159,15 +159,15 @@ fi
 
 printf "\nSetting permissions...\n"
 if [ "${MACHINE}" == 'eagle' ]; then
-  cmd "chmod -R a+rX,go-w ${INSTALL_DIR}"
-  cmd "chgrp -R n-ecom ${INSTALL_DIR}"
+  cmd "nice -n 19 ionice -c 3 chmod -R a+rX,go-w ${INSTALL_DIR}"
+  cmd "nice -n 19 ionice -c 3 chgrp -R n-ecom ${INSTALL_DIR}"
 elif [ "${MACHINE}" == 'rhodes' ]; then
-  cmd "chgrp windsim /opt"
-  cmd "chgrp windsim /opt/${TYPE}"
-  cmd "chgrp -R windsim ${INSTALL_DIR}"
-  cmd "chmod a+rX,go-w /opt"
-  cmd "chmod a+rX,go-w /opt/${TYPE}"
-  cmd "chmod -R a+rX,go-w ${INSTALL_DIR}"
+  cmd "nice -n 19 ionice -c 3 chgrp windsim /opt"
+  cmd "nice -n 19 ionice -c 3 chgrp windsim /opt/${TYPE}"
+  cmd "nice -n 19 ionice -c 3 chgrp -R windsim ${INSTALL_DIR}"
+  cmd "nice -n 19 ionice -c 3 chmod a+rX,go-w /opt"
+  cmd "nice -n 19 ionice -c 3 chmod a+rX,go-w /opt/${TYPE}"
+  cmd "nice -n 19 ionice -c 3 chmod -R a+rX,go-w ${INSTALL_DIR}"
 fi
 
 printf "\n$(date)\n"
