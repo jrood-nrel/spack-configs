@@ -12,11 +12,11 @@ spack:
     - git
     - gdb
     #- global
-    #- gnuplot+wx
+    - gnuplot+wx ^mesa
     - gnutls
     - htop
-    - imagemagick
-    - libxml2+python
+    - imagemagick ^mesa
+    - libxml2
     - likwid
     - ninja
     - makedepend

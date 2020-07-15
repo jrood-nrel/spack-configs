@@ -26,6 +26,7 @@ packages:
     version: [2019.5.281]
   libxml2:
     version: [2.9.8]
+    variants: +python
   llvm:
     variants: +omp_debug+omp_tsan+python
   nalu-wind:
