@@ -1,6 +1,6 @@
 packages:
   mesa:
-    variants: swr=skx
+    variants: +opengl +glx swr=skx
   llvm:
     variants: +cuda cuda_arch=70
   slurm:
