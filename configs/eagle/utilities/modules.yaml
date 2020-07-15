@@ -11,4 +11,4 @@ modules:
       environment:
         set:
           '${PACKAGE}_ROOT_DIR': '${PREFIX}'
-    blacklist: ['gcc', 'go', 'llvm', 'intel-parallel-studio', 'binutils', 'pgi']
+    blacklist: ['cuda', 'gcc', 'go', 'llvm', 'intel-parallel-studio', 'binutils', 'pgi']

@@ -1,5 +1,5 @@
 upstreams:
   spack-compilers:
-    install_tree: /opt/compilers/2020-07/spack/opt/spack
+    install_tree: /nopt/nrel/ecom/hpacf/compilers/2020-07/spack/opt/spack
     modules:
-      tcl: /opt/compilers/2020-07/spack/share/spack/modules
+      tcl: /nopt/nrel/ecom/hpacf/compilers/2020-07/spack/share/spack/modules
