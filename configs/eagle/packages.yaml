@@ -8,8 +8,8 @@ packages:
       slurm@19.05.2: /nopt/slurm/current
     buildable: False
   cuda:
+    version: [10.1.243]
     paths:
-      cuda@10.1.168: /nopt/nrel/apps/cuda/10.1.168
       cuda@10.0.130: /nopt/nrel/apps/cuda/10.0.130
       cuda@9.2.88: /nopt/nrel/apps/cuda/9.2.88
     #buildable: False
