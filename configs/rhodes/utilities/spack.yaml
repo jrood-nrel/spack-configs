@@ -29,7 +29,7 @@ spack:
     - stow
     - strace
     - texinfo
-    - texlive scheme=full
+    - texlive scheme=full ^mesa
     - tmux
     - unzip
     - vim
