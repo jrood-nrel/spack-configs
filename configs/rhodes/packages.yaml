@@ -1,6 +1,6 @@
 packages:
   mesa:
-    variants: swr=avx2
+    variants: +opengl +glx swr=avx2
   fftw:
     variants: simd=avx2
   py-horovod:
