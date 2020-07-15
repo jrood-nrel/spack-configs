@@ -12,7 +12,7 @@ spack:
     - git
     - gdb
     #- global
-    - gnuplot+wx
+    #- gnuplot+wx
     - gnutls
     - htop
     - imagemagick
