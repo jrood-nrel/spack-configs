@@ -16,7 +16,7 @@ spack:
     - gnutls
     - htop
     - imagemagick ^mesa
-    - libxml2
+    - libxml2 +python
     - likwid
     - ninja
     - makedepend
