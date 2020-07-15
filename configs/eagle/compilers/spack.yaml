@@ -16,7 +16,7 @@ spack:
     - go@1.14.4
     - llvm@10.0.0
     - llvm@9.0.1
-    - llvm@8.0.0
+    - llvm@8.0.0 ~cuda cuda_arch=none
     #- intel-parallel-studio@cluster.2020.1
     - intel-parallel-studio@cluster.2019.5
     - intel-parallel-studio@cluster.2018.4
