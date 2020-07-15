@@ -9,10 +9,6 @@ packages:
     buildable: False
   cuda:
     version: [10.1.243]
-    paths:
-      cuda@10.0.130: /nopt/nrel/apps/cuda/10.0.130
-      cuda@9.2.88: /nopt/nrel/apps/cuda/9.2.88
-    #buildable: False
   openmpi:
     variants: +pmi +cuda fabrics=ucx schedulers=slurm legacylaunchers=true
   mpich:
