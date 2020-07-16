@@ -11,6 +11,9 @@ modules:
       environment:
         set:
           '${PACKAGE}_ROOT_DIR': '${PREFIX}'
+    cuda:
+      filter:
+        environment_blacklist: ['CUDAHOSTCXX']
     intel-parallel-studio:
       environment:
         set:
@@ -19,5 +22,5 @@ modules:
       environment:
         set:
           PGROUPD_LICENSE_FILE: '27001@license-1.hpc.nrel.gov'
-    whitelist: ['gcc', 'go', 'llvm', 'intel-parallel-studio', 'binutils', 'pgi']
+    whitelist: ['cuda', 'gcc', 'go', 'llvm', 'intel-parallel-studio', 'binutils', 'pgi']
     blacklist: ['%gcc']
