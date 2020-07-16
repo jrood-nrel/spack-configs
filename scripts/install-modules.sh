@@ -5,8 +5,8 @@
 # up for the next stage by editing the yaml files used in the next stage.
 
 #TYPE=base
-TYPE=compilers
-#TYPE=utilities
+#TYPE=compilers
+TYPE=utilities
 #TYPE=software
 
 DATE=2020-07
@@ -148,6 +148,7 @@ fi
 printf "\nInstalling ${TYPE}...\n"
 
 cmd "spack env activate ${TYPE}"
+cmd "nice spack concretize -f"
 cmd "nice spack install"
 
 printf "\nDone installing ${TYPE} at $(date).\n"
