@@ -12,7 +12,6 @@ spack:
   - git
   - gdb
   - gnuplot+wx ^mesa ^llvm@8.0.0
-  #- global
   - gnutls
   - htop
   - imagemagick ^mesa ^llvm@8.0.0
@@ -34,6 +33,7 @@ spack:
   - unzip
   - vim
   - wget
-  - xterm
   - zsh
+  #- global
+  #- xterm
   view: false
