@@ -12,10 +12,10 @@ spack:
     - git
     - gdb
     #- global
-    - gnuplot+wx ^mesa
+    - gnuplot+wx ^mesa ^llvm@8.0.0
     - gnutls
     - htop
-    - imagemagick ^mesa
+    - imagemagick ^mesa ^llvm@8.0.0
     - libxml2 +python
     - likwid
     - ninja
@@ -29,7 +29,7 @@ spack:
     - stow
     - strace
     - texinfo
-    - texlive scheme=full ^mesa
+    - texlive scheme=full ^mesa ^llvm@8.0.0
     - tmux
     - unzip
     - vim
