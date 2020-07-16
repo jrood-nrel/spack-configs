@@ -1,39 +1,39 @@
 spack:
   specs:
-    - bc
-    - bison
-    - bzip2
-    - cmake
-    - cppcheck
-    - curl
-    - flex
-    - flex@2.5.39
-    - emacs
-    - git
-    - gdb
-    - gnuplot+wx ^mesa ^llvm@8.0.0
-    - gnutls
-    - htop
-    - imagemagick ^mesa ^llvm@8.0.0
-    - libxml2 +python
-    - likwid
-    - ninja
-    - makedepend
-    - patch
-    - pkg-config
-    - python
-    - python@2.7.18
-    - rsync
-    - screen
-    - stow
-    - strace
-    - texinfo
-    - texlive scheme=full ^mesa ^llvm@8.0.0
-    - tmux
-    - unzip
-    - vim
-    - wget
-    - zsh
-    #- global
-    - xterm
-  view: False
+  - bc
+  - bison
+  - bzip2
+  - cmake
+  - cppcheck
+  - curl
+  - flex
+  - flex@2.5.39
+  - emacs
+  - git
+  - gdb
+  - gnuplot+wx ^mesa ^llvm@8.0.0
+  - gnutls
+  - htop
+  - imagemagick ^mesa ^llvm@8.0.0
+  - libxml2 +python
+  - likwid
+  - ninja
+  - makedepend
+  - patch
+  - pkg-config
+  - python
+  - python@2.7.18
+  - rsync
+  - screen
+  - stow
+  - strace
+  - texinfo
+  - texlive scheme=full ^mesa ^llvm@8.0.0
+  - tmux
+  - unzip
+  - vim
+  - wget
+  - zsh
+  #- global
+  #- xterm
+  view: false
