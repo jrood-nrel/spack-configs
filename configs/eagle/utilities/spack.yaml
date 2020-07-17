@@ -11,10 +11,10 @@ spack:
   - emacs
   - git
   - gdb
-  - gnuplot+wx ^mesa ^llvm@8.0.0
+  - gnuplot+wx ^mesa ^llvm@8.0.0~cuda
   - gnutls
   - htop
-  - imagemagick ^mesa ^llvm@8.0.0
+  - imagemagick ^mesa ^llvm@8.0.0~cuda
   - libxml2 +python
   - likwid
   - ninja
@@ -28,7 +28,7 @@ spack:
   - stow
   - strace
   - texinfo
-  - texlive scheme=full ^mesa ^llvm@8.0.0
+  - texlive scheme=full ^mesa ^llvm@8.0.0~cuda
   - tmux
   - unzip
   - vim
