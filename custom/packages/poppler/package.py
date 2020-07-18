@@ -65,18 +65,18 @@ class Poppler(CMakePackage):
     patch('poppler_page_splash.patch', when='@0.64.0: ^qt@5.0:')
 
     # Only needed to run `make test`
-    resource(
-        name='test',
-        git='https://anongit.freedesktop.org/git/poppler/test.git',
-        placement='testdata'
-    )
+    #resource(
+    #    name='test',
+    #    git='https://anongit.freedesktop.org/git/poppler/test.git',
+    #    placement='testdata'
+    #)
 
     def cmake_args(self):
         spec = self.spec
 
         args = [
-            '-DTESTDATADIR={0}'.format(
-                join_path(self.stage.source_path, 'testdata')),
+            #'-DTESTDATADIR={0}'.format(
+            #    join_path(self.stage.source_path, 'testdata')),
             # TODO: Add packages for these missing dependencies
             '-DENABLE_SPLASH=OFF',
             '-DWITH_NSS3=OFF',
