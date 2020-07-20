@@ -10,6 +10,8 @@ cmd() {
   if ${execute_cmds}; then eval "$@"; fi
 }
 
+set +e
+
 #/projects
 cmd "chgrp windsim /projects"
 cmd "chgrp -R windsim /projects/ecp"
