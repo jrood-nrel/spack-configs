@@ -10,7 +10,7 @@ modules:
         - '{name}'
       environment:
         set:
-          '${PACKAGE}_ROOT_DIR': '${PREFIX}'
+          '{name}_ROOT_DIR': '{prefix}'
     intel-parallel-studio:
       environment:
         set:

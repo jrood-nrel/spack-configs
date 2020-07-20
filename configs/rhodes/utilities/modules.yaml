@@ -7,10 +7,10 @@ modules:
     hash_length: 0
     all:
       conflict:
-        - '${name}'
+        - '{name}'
       environment:
         set:
-          '${PACKAGE}_ROOT_DIR': '${PREFIX}'
+          '{name}_ROOT_DIR': '{prefix}'
     ^python:
       autoload: 'direct'
     blacklist: ['cuda', 'gcc', 'go', 'llvm', 'intel-parallel-studio', 'binutils', 'pgi']
