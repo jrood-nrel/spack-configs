@@ -1,14 +1,16 @@
 modules:
   enable:
     - tcl
-
   tcl:
-    naming_scheme: '${COMPILERNAME}-${COMPILERVER}/${PACKAGE}/${VERSION}'
+    projections:
+      all: '{compiler.name}-{compiler.version}/{name}/{version}/{hash:4}'
     hash_length: 0
     all:
       conflict:
-        - '${PACKAGE}'
+        - '${name}'
       environment:
         set:
           '${PACKAGE}_ROOT_DIR': '${PREFIX}'
+    ^python:
+      autoload: 'direct'
     blacklist: ['cuda', 'gcc', 'go', 'llvm', 'intel-parallel-studio', 'binutils', 'pgi']
