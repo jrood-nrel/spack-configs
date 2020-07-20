@@ -2,7 +2,6 @@ modules:
   enable:
     - tcl
   tcl:
-    verbose: True
     projections:
       all: '{compiler.name}-{compiler.version}/{name}/{version}/{hash:4}'
     hash_length: 0
@@ -12,6 +11,4 @@ modules:
       environment:
         set:
           '{name}_ROOT_DIR': '{prefix}'
-    ^python:
-      autoload: 'direct'
     blacklist: ['cuda', 'gcc', 'go', 'llvm', 'intel-parallel-studio', 'binutils', 'pgi']

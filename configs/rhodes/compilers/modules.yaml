@@ -2,7 +2,6 @@ modules:
   enable:
     - tcl
   tcl:
-    verbose: True
     projections:
       all: '{compiler.name}-{compiler.version}/{name}/{version}/{hash:4}'
     hash_length: 0
@@ -20,7 +19,5 @@ modules:
       environment:
         set:
           PGROUPD_LICENSE_FILE: '27001@license-1.hpc.nrel.gov'
-    ^python:
-      autoload: 'direct'
     whitelist: ['gcc', 'go', 'llvm', 'intel-parallel-studio', 'binutils', 'pgi']
     blacklist: ['%gcc']
