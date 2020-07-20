@@ -2,6 +2,7 @@ modules:
   enable:
     - tcl
   tcl:
+    verbose: True
     projections:
       all: '{compiler.name}-{compiler.version}/{name}/{version}/{hash:4}'
     hash_length: 0
