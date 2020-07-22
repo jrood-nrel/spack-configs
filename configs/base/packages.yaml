@@ -41,7 +41,7 @@ packages:
   openmpi:
     version: [4.0.4]
   paraview:
-    variants: +python3~python+osmesa~opengl2
+    variants: +python3~python+osmesa
   python:
     version: [3.7.7]
   py-yt:
