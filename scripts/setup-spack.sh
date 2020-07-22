@@ -68,6 +68,7 @@ if [ "${MACHINE}" == 'eagle' ] || \
   if [ "${MACHINE}" != 'mac' ]; then
     (set -x; cp ${THIS_REPO_DIR}/configs/${MACHINE}/software/compilers.yaml ${SPACK_ROOT}/etc/spack/)
     (set -x; cp ${THIS_REPO_DIR}/configs/${MACHINE}/software/modules.yaml ${SPACK_ROOT}/etc/spack/)
+    (set -x; cp ${THIS_REPO_DIR}/configs/${MACHINE}/software/upstreams.yaml ${SPACK_ROOT}/etc/spack/)
   fi
 
 else
