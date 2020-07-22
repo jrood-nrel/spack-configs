@@ -26,10 +26,10 @@ spack:
   - amrvis dims=3
   - amrvis+profiling dims=2
   - paraview
+  - visit
   - nalu-wind+catalyst
   - netcdf-fortran
   - sundials
-  - gnuplot+wx
   - nalu-wind~catalyst %intel
   - nalu-wind~catalyst %clang
   view: false

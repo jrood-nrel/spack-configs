@@ -39,7 +39,7 @@ packages:
   openmpi:
     version: [4.0.4]
   paraview:
-    variants: +python3+osmesa
+    variants: +python3~python+osmesa~opengl2
   python:
     version: [3.7.7]
   py-yt:
@@ -61,6 +61,8 @@ packages:
   trilinos:
     version: [develop]
     variants: ~python~complex+explicit_template_instantiation~float~fortran~openmp~xsdkflags+boost~cgns+exodus+gtest+hdf5~hypre~metis~mumps+pnetcdf~suite-sparse~superlu-dist+superlu~x11+zlib~alloptpkgs~amesos+amesos2~anasazi~aztec+belos~epetra~epetraext~ifpack+ifpack2~intrepid~intrepid2~isorropia+kokkos~ml~minitensor+muelu~nox~piro~phalanx~rol~rythmos~sacado~shylu+stk+shards~teko~tempus+teuchos+tpetra+zoltan+zoltan2~dtk~fortrilinos build_type=Release
+  visit:
+    variants: ~gui+hdf5+python+silo+adios2
   zsh:
     version: [5.7.1]
   all:

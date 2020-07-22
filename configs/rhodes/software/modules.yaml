@@ -1,19 +1,13 @@
 modules:
   enable:
     - tcl
-
   tcl:
-    naming_scheme: '${COMPILERNAME}-${COMPILERVER}/${PACKAGE}/${VERSION}'
+    projections:
+      all: '{compiler.name}-{compiler.version}/{name}/{version}/{hash:4}'
     hash_length: 0
     all:
-      suffixes:
-        #'boost+mpi': 'mpi'
-        'yaml-cpp~shared': 'static'
-        'amrvis dims=3': '3d'
-        'amrvis dims=2': '2d'
       conflict:
-        - '${PACKAGE}'
+        - '{name}'
       environment:
         set:
-          '${PACKAGE}_ROOT_DIR': '${PREFIX}'
-    #blacklist: ['pcre']
+          '{name}_ROOT_DIR': '{prefix}'
