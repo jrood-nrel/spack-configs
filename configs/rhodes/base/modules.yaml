@@ -1,15 +1,15 @@
 modules:
   enable:
     - tcl
-
   tcl:
-    naming_scheme: '${COMPILERNAME}-${COMPILERVER}/${PACKAGE}/${VERSION}'
+    projections:
+      all: '{compiler.name}-{compiler.version}/{name}/{version}'
     hash_length: 0
     all:
       conflict:
-        - '${PACKAGE}'
+        - '{name}'
       environment:
         set:
-          '${PACKAGE}_ROOT_DIR': '${PREFIX}'
+          '{name}_ROOT_DIR': '{prefix}'
     whitelist: ['gcc']
-    blacklist: ['%gcc@4.8.5']
+    blacklist: ['%gcc']
