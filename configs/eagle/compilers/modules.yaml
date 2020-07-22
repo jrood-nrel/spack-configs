@@ -19,5 +19,5 @@ modules:
       environment:
         set:
           PGROUPD_LICENSE_FILE: '27001@license-1.hpc.nrel.gov'
-    whitelist: ['gcc', 'go', 'llvm', 'intel-parallel-studio', 'binutils', 'pgi']
+    whitelist: ['cuda', 'gcc', 'go', 'llvm', 'intel-parallel-studio', 'binutils', 'pgi']
     blacklist: ['%gcc']
