@@ -111,24 +111,21 @@ fi
 printf "\nLoading modules...\n"
 cmd "module purge"
 cmd "module unuse ${MODULEPATH}"
-cmd "module use ${BASE_DIR}/utilities/modules"
-if [ "${MACHINE}" == 'eagle' ]; then
-  cmd "module use ${BASE_DIR}/compilers/modules"
-  for MODULE in binutils unzip bzip2 git texinfo bison wget python; do
-    cmd "module load ${MODULE}"
-  done
-elif [ "${MACHINE}" == 'rhodes' ]; then
-  for MODULE in binutils unzip patch bzip2 git texinfo bison wget bc python; do
-    cmd "module load ${MODULE}"
-  done
-fi
 if [ "${TYPE}" == 'compilers' ] || [ "${TYPE}" == 'utilities' ]; then
+  cmd "module use ${BASE_DIR}/utilities/modules"
+  if [ "${MACHINE}" == 'eagle' ]; then
+    cmd "module use ${BASE_DIR}/compilers/modules"
+    cmd "module load binutils unzip bzip2 git texinfo bison wget python"
+  elif [ "${MACHINE}" == 'rhodes' ]; then
+    cmd "module load binutils unzip patch bzip2 git texinfo bison wget bc python"
+  fi
   if [ "${TYPE}" == 'utilities' ]; then
     cmd "module load flex texlive"
   fi
-  cmd "module use ${BASE_DIR}/base/modules-${DATE}"
-  cmd "module load ${GCC_COMPILER_MODULE}"
-#elif [ "${TYPE}" == 'software' ]; then
+  #cmd "module use ${BASE_DIR}/base/modules-${DATE}"
+  #cmd "module load ${GCC_COMPILER_MODULE}"
+elif [ "${TYPE}" == 'software' ]; then
+  cmd "module use ${BASE_DIR}/utilities/modules-${DATE}"
 #  cmd "module use ${BASE_DIR}/compilers/modules-${DATE}"
 #  cmd "module load ${GCC_COMPILER_MODULE}"
 #  cmd "module load ${INTEL_COMPILER_MODULE}"
