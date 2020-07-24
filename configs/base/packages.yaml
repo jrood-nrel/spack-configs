@@ -46,8 +46,8 @@ packages:
     version: [3.7.7]
   py-yt:
     variants: ~astropy
-  #py-numpy:
-  #  version: [1.18.5]
+  py-numpy:
+    version: [1.18.5]
   mpich:
     version: [3.3.2]
   parallel-netcdf:
