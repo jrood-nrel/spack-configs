@@ -74,4 +74,6 @@ packages:
       mpi: [openmpi, intel-mpi]
       blas: [netlib-lapack, intel-mkl]
       lapack: [netlib-lapack, intel-mkl]
+      gl: [osmesa+opengl]
+      glx: [osmesa+glx]
 
