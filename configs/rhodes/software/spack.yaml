@@ -22,12 +22,11 @@ spack:
   - masa
   - valgrind
   - ascent
-  - sensei ^mesa ^llvm@8.0.0
+  - sensei ^llvm@8.0.0
   - amrvis dims=3
   - amrvis+profiling dims=2
-  - paraview ^mesa ^llvm@8.0.0
-  - visit ^mesa ^llvm@8.0.0
-  - nalu-wind+catalyst ^mesa ^llvm@8.0.0
+  - paraview ^llvm@8.0.0
+  - nalu-wind+catalyst ^llvm@8.0.0
   - netcdf-fortran
   - sundials
   - nalu-wind~catalyst %intel
