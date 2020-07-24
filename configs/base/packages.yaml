@@ -16,6 +16,8 @@ packages:
   hdf5:
     version: [1.10.4]
     variants: +cxx+hl
+  hwloc:
+    version: [1.11.11]
   hypre:
     version: [2.18.2]
     variants: +int64~superlu-dist
