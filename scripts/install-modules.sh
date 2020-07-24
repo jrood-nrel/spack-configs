@@ -111,25 +111,11 @@ fi
 printf "\nLoading modules...\n"
 cmd "module purge"
 cmd "module unuse ${MODULEPATH}"
-if [ "${TYPE}" == 'compilers' ] || [ "${TYPE}" == 'utilities' ]; then
-  cmd "module use ${BASE_DIR}/utilities/modules"
-  if [ "${MACHINE}" == 'eagle' ]; then
-    cmd "module use ${BASE_DIR}/compilers/modules"
-    cmd "module load binutils unzip bzip2 git texinfo bison wget python"
-  elif [ "${MACHINE}" == 'rhodes' ]; then
-    cmd "module load binutils unzip patch bzip2 git texinfo bison wget bc python"
-  fi
-  if [ "${TYPE}" == 'utilities' ]; then
-    cmd "module load flex texlive"
-  fi
-  #cmd "module use ${BASE_DIR}/base/modules-${DATE}"
-  #cmd "module load ${GCC_COMPILER_MODULE}"
-elif [ "${TYPE}" == 'software' ]; then
-  cmd "module use ${BASE_DIR}/utilities/modules-${DATE}"
-#  cmd "module use ${BASE_DIR}/compilers/modules-${DATE}"
-#  cmd "module load ${GCC_COMPILER_MODULE}"
-#  cmd "module load ${INTEL_COMPILER_MODULE}"
-#  cmd "module load ${CLANG_COMPILER_MODULE}"
+cmd "module use ${BASE_DIR}/utilities/modules"
+cmd "module load bison bc bzip2 binutils curl patch git python texinfo unzip wget"
+# Can't always load flex or texlive or some things fail
+if [ "${TYPE}" == 'utilities' ]; then
+  cmd "module load flex texlive"
 fi
 
 cmd "source ${SPACK_ROOT}/share/spack/setup-env.sh"
