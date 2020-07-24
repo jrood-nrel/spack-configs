@@ -6,8 +6,8 @@
 
 #TYPE=base
 #TYPE=compilers
-TYPE=utilities
-#TYPE=software
+#TYPE=utilities
+TYPE=software
 
 DATE=2020-07
 
@@ -128,11 +128,11 @@ if [ "${TYPE}" == 'compilers' ] || [ "${TYPE}" == 'utilities' ]; then
   fi
   cmd "module use ${BASE_DIR}/base/modules-${DATE}"
   cmd "module load ${GCC_COMPILER_MODULE}"
-elif [ "${TYPE}" == 'software' ]; then
-  cmd "module use ${BASE_DIR}/compilers/modules-${DATE}"
-  cmd "module load ${GCC_COMPILER_MODULE}"
-  cmd "module load ${INTEL_COMPILER_MODULE}"
-  cmd "module load ${CLANG_COMPILER_MODULE}"
+#elif [ "${TYPE}" == 'software' ]; then
+#  cmd "module use ${BASE_DIR}/compilers/modules-${DATE}"
+#  cmd "module load ${GCC_COMPILER_MODULE}"
+#  cmd "module load ${INTEL_COMPILER_MODULE}"
+#  cmd "module load ${CLANG_COMPILER_MODULE}"
 fi
 
 cmd "source ${SPACK_ROOT}/share/spack/setup-env.sh"
