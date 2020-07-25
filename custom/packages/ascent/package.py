@@ -314,15 +314,15 @@ class Ascent(Package, CudaPackage):
         cfg.write("# using %s compiler spec\n" % spec.compiler)
         cfg.write("#######\n\n")
         cfg.write("# c compiler used by spack\n")
-        cfg.write(cmake_cache_entry("CMAKE_C_COMPILER", c_compiler))
+        cfg.write(cmake_cache_entry("CMAKE_C_COMPILER", spec['mpi'].mpicc))
         cfg.write("# cpp compiler used by spack\n")
-        cfg.write(cmake_cache_entry("CMAKE_CXX_COMPILER", cpp_compiler))
+        cfg.write(cmake_cache_entry("CMAKE_CXX_COMPILER", spec['mpi'].mpicxx))
 
         cfg.write("# fortran compiler used by spack\n")
         if "+fortran" in spec and f_compiler is not None:
             cfg.write(cmake_cache_entry("ENABLE_FORTRAN", "ON"))
             cfg.write(cmake_cache_entry("CMAKE_Fortran_COMPILER",
-                                        f_compiler))
+                                        spec['mpi'].mpifc))
         else:
             cfg.write("# no fortran compiler found\n\n")
             cfg.write(cmake_cache_entry("ENABLE_FORTRAN", "OFF"))
@@ -413,9 +413,9 @@ class Ascent(Package, CudaPackage):
             #    mpicxx_path = "CC"
             #    mpifc_path = "ftn"
             cfg.write(cmake_cache_entry("ENABLE_MPI", "ON"))
-            cfg.write(cmake_cache_entry("CMAKE_C_COMPILER", mpicc_path))
-            cfg.write(cmake_cache_entry("CMAKE_CXX_COMPILER", mpicxx_path))
-            cfg.write(cmake_cache_entry("CMAKE_Fortran_COMPILER", mpifc_path))
+            cfg.write(cmake_cache_entry("MPI_C_COMPILER", mpicc_path))
+            cfg.write(cmake_cache_entry("MPI_CXX_COMPILER", mpicxx_path))
+            cfg.write(cmake_cache_entry("MPI_Fortran_COMPILER", mpifc_path))
             mpiexe_bin = join_path(spec['mpi'].prefix.bin, 'mpiexec')
             if os.path.isfile(mpiexe_bin):
                 # starting with cmake 3.10, FindMPI expects MPIEXEC_EXECUTABLE
