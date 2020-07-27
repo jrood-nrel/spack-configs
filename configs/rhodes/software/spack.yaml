@@ -26,7 +26,7 @@ spack:
   - amrvis dims=3
   - amrvis+profiling dims=2
   - paraview ^llvm@8.0.0
-  - nalu-wind+catalyst ^llvm@8.0.0
+  - nalu-wind~catalyst
   - netcdf-fortran
   - sundials
   - nalu-wind~catalyst %intel ^intel-mpi

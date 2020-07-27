@@ -17,7 +17,7 @@ class TrilinosCatalystIossAdapter(CMakePackage):
 
     depends_on('bison', type='build')
     depends_on('flex', type='build')
-    depends_on('catalyst')
+    depends_on('paraview')
     depends_on('py-numpy', type=('build', 'run'))
 
     root_cmakelists_dir = join_path('packages', 'seacas', 'libraries',
