@@ -23,7 +23,7 @@ packages:
     version: [cluster.2019.5]
     variants: +advisor+inspector+itac+mkl+vtune
   intel-mpi:
-    version: [2019.5.281]
+    version: [2019.7.217]
   intel-mkl:
     version: [2019.5.281]
   libxml2:

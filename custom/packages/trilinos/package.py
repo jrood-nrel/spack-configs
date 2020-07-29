@@ -397,6 +397,14 @@ class Trilinos(CMakePackage):
             spack_env.set('MPICH_CXX', join_path(self.stage.path, 'src', 'packages', 'kokkos', 'bin', 'nvcc_wrapper'))
             spack_env.set('CUDACXX', join_path(self.spec['cuda'].prefix, 'bin', 'nvcc'))
 
+    def setup_build_environment(self, env):
+        if '%intel' in self.spec:
+            # Use these on Rhodes
+            env.append_path('LD_LIBRARY_PATH', join_path(self.spec['mpi'].prefix, 'compilers_and_libraries_2020.1.217', 'linux', 'mpi', 'intel64', 'libfabric', 'lib'))
+            env.append_path('FI_PROVIDER_PATH', join_path(self.spec['mpi'].prefix, 'compilers_and_libraries_2020.1.217', 'linux', 'mpi', 'intel64', 'libfabric', 'lib', 'prov'))
+            # Eagle needs a libfabric built by us
+
+
     def cmake_args(self):
         spec = self.spec
         define = CMakePackage.define
@@ -423,6 +431,7 @@ class Trilinos(CMakePackage):
             define('Trilinos_ENABLE_TESTS', False),
             define('Trilinos_ENABLE_EXAMPLES', False),
             define('Trilinos_ENABLE_CXX11', True),
+            define('CMAKE_INTERPROCEDURAL_OPTIMIZATION', False),
             self.define_from_variant('BUILD_SHARED_LIBS', 'shared'),
             define_trilinos_enable('DEBUG', 'debug'),
             # The following can cause problems on systems that don't have
