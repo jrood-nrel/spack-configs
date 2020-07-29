@@ -20,10 +20,10 @@ packages:
     version: [2.18.2]
     variants: +int64~superlu-dist
   intel-parallel-studio:
-    version: [cluster.2019.5]
+    version: [cluster.2020.2]
     variants: +advisor+inspector+itac+mkl+vtune
   intel-mpi:
-    version: [2019.7.217]
+    version: [2019.8.254]
   intel-mkl:
     version: [2019.5.281]
   libxml2:

@@ -12,7 +12,7 @@ spack:
     - llvm@10.0.0
     - llvm@9.0.1
     - llvm@8.0.0
-    #- intel-parallel-studio@cluster.2020.1
+    - intel-parallel-studio@cluster.2020.2~advisor~inspector~vtune
     - intel-parallel-studio@cluster.2019.5
     - intel-parallel-studio@cluster.2018.4
     - pgi@19.10
