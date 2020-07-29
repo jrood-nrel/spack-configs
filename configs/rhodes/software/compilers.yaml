@@ -136,6 +136,26 @@ compilers:
     spec: intel@19.0.5
     target: x86_64
 - compiler:
+    environment:
+      set:
+        INTEL_LICENSE_FILE: 28519@license-1.hpc.nrel.gov
+    extra_rpaths:
+     - /opt/compilers/2020-07/spack/opt/spack/linux-centos7-broadwell/gcc-8.4.0/intel-parallel-studio-cluster.2020.2-wehyqthdi6kpopfitwktzcy6vqikyc2c/compilers_and_libraries/linux/lib/intel64
+     #- /opt/compilers/2020-07/spack/opt/spack/linux-centos7-broadwell/gcc-8.4.0/gcc-8.4.0-26fck7zymxe7v7a7bpybuzqnq43klean/lib64
+    flags:
+      cflags: -O2 -xCORE-AVX2
+      cxxflags: -O2 -xCORE-AVX2
+      fflags: -O2 -xCORE-AVX2
+    modules: []
+    operating_system: centos7
+    paths:
+      cc:  /opt/compilers/2020-07/spack/opt/spack/linux-centos7-broadwell/gcc-8.4.0/intel-parallel-studio-cluster.2020.2-wehyqthdi6kpopfitwktzcy6vqikyc2c/compilers_and_libraries/linux/bin/intel64/icc
+      cxx: /opt/compilers/2020-07/spack/opt/spack/linux-centos7-broadwell/gcc-8.4.0/intel-parallel-studio-cluster.2020.2-wehyqthdi6kpopfitwktzcy6vqikyc2c/compilers_and_libraries/linux/bin/intel64/icpc
+      f77: /opt/compilers/2020-07/spack/opt/spack/linux-centos7-broadwell/gcc-8.4.0/intel-parallel-studio-cluster.2020.2-wehyqthdi6kpopfitwktzcy6vqikyc2c/compilers_and_libraries/linux/bin/intel64/ifort
+      fc:  /opt/compilers/2020-07/spack/opt/spack/linux-centos7-broadwell/gcc-8.4.0/intel-parallel-studio-cluster.2020.2-wehyqthdi6kpopfitwktzcy6vqikyc2c/compilers_and_libraries/linux/bin/intel64/ifort
+    spec: intel@20.0.2
+    target: x86_64
+- compiler:
     extra_rpaths:
      - /opt/compilers/2020-07/spack/opt/spack/linux-centos7-broadwell/gcc-8.4.0/llvm-8.0.0-zsrlldhrzzrx2jmwc7tx5pmodym25lei/lib
      - /opt/compilers/2020-07/spack/opt/spack/linux-centos7-broadwell/gcc-8.4.0/llvm-8.0.0-zsrlldhrzzrx2jmwc7tx5pmodym25lei/lib/clang/8.0.0/lib/linux
