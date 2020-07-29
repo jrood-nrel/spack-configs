@@ -111,11 +111,14 @@ fi
 printf "\nLoading modules...\n"
 cmd "module purge"
 cmd "module unuse ${MODULEPATH}"
+cmd "module use ${BASE_DIR}/compilers/modules"
 cmd "module use ${BASE_DIR}/utilities/modules"
 cmd "module load bison bc bzip2 binutils curl patch git python texinfo unzip wget"
 # Can't always load flex or texlive or some things fail
 if [ "${TYPE}" == 'utilities' ]; then
   cmd "module load flex texlive"
+elif [ "${TYPE}" == 'software' ]; then
+  cmd "module load gcc"
 fi
 
 cmd "source ${SPACK_ROOT}/share/spack/setup-env.sh"
