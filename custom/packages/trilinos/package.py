@@ -399,11 +399,8 @@ class Trilinos(CMakePackage):
 
     def setup_build_environment(self, env):
         if '%intel' in self.spec:
-            # Use these on Rhodes
-            env.append_path('LD_LIBRARY_PATH', join_path(self.spec['mpi'].prefix, 'compilers_and_libraries_2020.1.217', 'linux', 'mpi', 'intel64', 'libfabric', 'lib'))
-            env.append_path('FI_PROVIDER_PATH', join_path(self.spec['mpi'].prefix, 'compilers_and_libraries_2020.1.217', 'linux', 'mpi', 'intel64', 'libfabric', 'lib', 'prov'))
-            # Eagle needs a libfabric built by us
-
+            env.append_path('LD_LIBRARY_PATH', self.component_lib_dir('mpi') + '/../libfabric/lib')
+            env.append_path('FI_PROVIDER_PATH', self.component_lib_dir('mpi') + '/../libfabric/lib/prov')
 
     def cmake_args(self):
         spec = self.spec
