@@ -65,8 +65,8 @@ elif [ "${TYPE}" == 'compilers' ] || [ "${TYPE}" == 'utilities' ] || [ "${TYPE}"
   fi
 fi
 GCC_COMPILER_MODULE=gcc/${GCC_COMPILER_VERSION}
-INTEL_COMPILER_VERSION=19.0.5
-INTEL_COMPILER_MODULE=intel-parallel-studio/cluster.2019.5
+INTEL_COMPILER_VERSION=18.0.4
+INTEL_COMPILER_MODULE=intel-parallel-studio/cluster.2018.4
 CLANG_COMPILER_VERSION=10.0.0
 CLANG_COMPILER_MODULE=llvm/${CLANG_COMPILER_VERSION}
 
@@ -144,6 +144,12 @@ fi
 
 printf "\nSetting permissions...\n"
 if [ "${MACHINE}" == 'eagle' ]; then
+  # Need to create a blank .version for name/version splitting for lmod
+  #cd ${INSTALL_DIR}/${DATE}/share/spack/modules/linux-centos7-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} && find . -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -I % touch %/.version
+  #if [ "${TYPE}" != 'software' ]; then
+  #  cd ${INSTALL_DIR}/${DATE}/share/spack/modules/linux-centos7-${CPU_OPT}/intel-${INTEL_COMPILER_VERSION} && find . -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -I % touch %/.version
+  #  cd ${INSTALL_DIR}/${DATE}/share/spack/modules/linux-centos7-${CPU_OPT}/clang-${CLANG_COMPILER_VERSION} && find . -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -I % touch %/.version
+  #fi
   cmd "nice -n 19 ionice -c 3 chmod -R a+rX,go-w ${INSTALL_DIR}"
   cmd "nice -n 19 ionice -c 3 chgrp -R n-ecom ${INSTALL_DIR}"
 elif [ "${MACHINE}" == 'rhodes' ]; then
