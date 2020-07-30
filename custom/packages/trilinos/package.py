@@ -397,10 +397,10 @@ class Trilinos(CMakePackage):
             spack_env.set('MPICH_CXX', join_path(self.stage.path, 'src', 'packages', 'kokkos', 'bin', 'nvcc_wrapper'))
             spack_env.set('CUDACXX', join_path(self.spec['cuda'].prefix, 'bin', 'nvcc'))
 
-    def setup_build_environment(self, env):
-        if '%intel' in self.spec:
-            env.append_path('LD_LIBRARY_PATH', self.component_lib_dir('mpi') + '/../libfabric/lib')
-            env.append_path('FI_PROVIDER_PATH', self.component_lib_dir('mpi') + '/../libfabric/lib/prov')
+    #def setup_build_environment(self, env):
+    #    if '%intel' in self.spec:
+    #        env.append_path('LD_LIBRARY_PATH', self.component_lib_dir('mpi') + '/../libfabric/lib')
+    #        env.append_path('FI_PROVIDER_PATH', self.component_lib_dir('mpi') + '/../libfabric/lib/prov')
 
     def cmake_args(self):
         spec = self.spec
@@ -428,9 +428,9 @@ class Trilinos(CMakePackage):
             define('Trilinos_ENABLE_TESTS', False),
             define('Trilinos_ENABLE_EXAMPLES', False),
             define('Trilinos_ENABLE_CXX11', True),
-            define('CMAKE_INTERPROCEDURAL_OPTIMIZATION', False),
-            self.define_from_variant('BUILD_SHARED_LIBS', 'shared'),
-            define_trilinos_enable('DEBUG', 'debug'),
+            #define('CMAKE_INTERPROCEDURAL_OPTIMIZATION', False),
+            #self.define_from_variant('BUILD_SHARED_LIBS', 'shared'),
+            #define_trilinos_enable('DEBUG', 'debug'),
             # The following can cause problems on systems that don't have
             # static libraries available for things like dl and pthreads
             # for example when trying to build static libs
