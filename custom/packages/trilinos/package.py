@@ -428,8 +428,7 @@ class Trilinos(CMakePackage):
             define('Trilinos_ENABLE_TESTS', False),
             define('Trilinos_ENABLE_EXAMPLES', False),
             define('Trilinos_ENABLE_CXX11', True),
-            #define('CMAKE_INTERPROCEDURAL_OPTIMIZATION', False),
-            #self.define_from_variant('BUILD_SHARED_LIBS', 'shared'),
+            self.define_from_variant('BUILD_SHARED_LIBS', 'shared'),
             #define_trilinos_enable('DEBUG', 'debug'),
             # The following can cause problems on systems that don't have
             # static libraries available for things like dl and pthreads
