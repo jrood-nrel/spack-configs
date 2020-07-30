@@ -28,4 +28,5 @@ packages:
   pgi:
     variants: +nvidia
   ucx:
+    variants: +optimizations
     version: [1.6.1]
