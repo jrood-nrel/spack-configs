@@ -139,7 +139,7 @@ printf "\nDone installing ${TYPE} at $(date).\n"
 
 printf "\nCreating dated modules symlink...\n"
 if [ "${TYPE}" != 'software' ]; then
-  cmd "cd ${INSTALL_DIR}/.. && ln -s ${DATE}/spack/share/spack/modules/linux-centos7-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} modules-${DATE} && cd -"
+  cmd "cd ${INSTALL_DIR}/.. && ln -s ${DATE}/spack/share/spack/modules/linux-centos7-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} modules-${DATE} && cd - || true"
 fi
 
 printf "\nSetting permissions...\n"
