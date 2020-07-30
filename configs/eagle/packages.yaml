@@ -9,6 +9,8 @@ packages:
     buildable: False
   cuda:
     version: [10.1.243]
+  cudnn:
+    version: [7.6.5.32-10.1-linux-x64]
   openmpi:
     variants: +pmi +cuda fabrics=ucx schedulers=slurm legacylaunchers=true
   mpich:
