@@ -14,7 +14,7 @@ packages:
   mpich:
     variants: netmod=ucx device=ch4 +slurm +hydra
   py-horovod:
-    variants: tensor_ops=mpi,nccl frameworks=pytorch,tensorflow
+    variants: tensor_ops=mpi frameworks=pytorch,tensorflow
   py-tensorflow:
     variants: +cuda cuda_arch=70 +nccl
   py-torch:
