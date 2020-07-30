@@ -13,8 +13,12 @@ packages:
     variants: +pmi +cuda fabrics=ucx schedulers=slurm legacylaunchers=true
   mpich:
     variants: netmod=ucx device=ch4 +slurm +hydra
-  #hwloc:
-  #  variants: ~cuda ~nvml ~gl
+  py-horovod:
+    variants: tensor_ops=mpi,nccl frameworks=pytorch,tensorflow
+  py-tensorflow:
+    variants: +cuda cuda_arch=70 +nccl
+  py-torch:
+    variants: +cuda cuda_arch=70 +cudnn +nccl
   fftw:
     variants: +mpi+fma simd=avx512
   libfabric:
