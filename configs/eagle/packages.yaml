@@ -27,3 +27,5 @@ packages:
     variants: fabrics=verbs
   pgi:
     variants: +nvidia
+  ucx:
+    version: [1.6.1]
