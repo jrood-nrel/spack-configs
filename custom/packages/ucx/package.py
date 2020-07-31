@@ -54,6 +54,7 @@ class Ucx(AutotoolsPackage, CudaPackage):
     depends_on('numactl')
     depends_on('rdma-core')
     depends_on('gdrcopy@1.3')
+    depends_on('cuda')
 
     def configure_args(self):
         args = []
