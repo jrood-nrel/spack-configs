@@ -28,5 +28,5 @@ packages:
   pgi:
     variants: +nvidia
   ucx:
-    variants: +optimizations
+    variants: +optimizations+gdrcopy
     version: [1.6.1]
