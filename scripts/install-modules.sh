@@ -120,8 +120,8 @@ elif [ "${TYPE}" == 'software' ]; then
 fi
 
 cmd "source ${SPACK_ROOT}/share/spack/setup-env.sh"
-cmd "spack compilers"
-cmd "spack arch"
+#cmd "spack compilers"
+#cmd "spack arch"
 
 if [ "${MACHINE}" == 'eagle' ]; then
   printf "\nMaking and setting TMPDIR to disk...\n"
@@ -132,7 +132,7 @@ fi
 printf "\nInstalling ${TYPE}...\n"
 
 cmd "spack env activate ${TYPE}"
-cmd "nice spack concretize -f"
+cmd "spack concretize -f"
 cmd "nice spack install"
 
 printf "\nDone installing ${TYPE} at $(date).\n"
