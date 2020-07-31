@@ -11,3 +11,4 @@ modules:
       environment:
         set:
           '{name}_ROOT_DIR': '{prefix}'
+    blacklist: ['cmake', 'llvm']
