@@ -58,6 +58,8 @@ packages:
     variants: +catalyst+hdf5+python
   superlu:
     version: [4.3]
+  texlive:
+    variants: scheme=full
   tioga:
     version: [develop]
   trilinos:
