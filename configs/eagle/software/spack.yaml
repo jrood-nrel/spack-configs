@@ -29,6 +29,7 @@ spack:
   - nalu-wind~catalyst
   - netcdf-fortran
   - sundials
+  - nccmp
   - nalu-wind~catalyst %intel ^intel-mpi
   - nalu-wind~catalyst %clang
   view: false
