@@ -5,9 +5,9 @@
 # up for the next stage by editing the yaml files used in the next stage.
 
 #TYPE=base
-#TYPE=compilers
+TYPE=compilers
 #TYPE=utilities
-TYPE=software
+#TYPE=software
 
 DATE=2020-07
 
@@ -92,6 +92,9 @@ if [ ! -d "${INSTALL_DIR}" ]; then
   cmd "cp ${THIS_REPO_DIR}/configs/${MACHINE}/${TYPE}/compilers.yaml ${SPACK_ROOT}/etc/spack/"
   cmd "cp ${THIS_REPO_DIR}/configs/${MACHINE}/${TYPE}/modules.yaml ${SPACK_ROOT}/etc/spack/"
   cmd "cp ${THIS_REPO_DIR}/configs/${MACHINE}/${TYPE}/upstreams.yaml ${SPACK_ROOT}/etc/spack/ || true"
+  if [ "${TYPE}" == 'compilers' ]; then
+    cmd "rm ${SPACK_ROOT}/etc/spack/upstreams.yaml || true"
+  fi
   cmd "mkdir -p ${SPACK_ROOT}/etc/spack/licenses/intel"
   cmd "cp ${HOME}/save/license.lic ${SPACK_ROOT}/etc/spack/licenses/intel/"
   cmd "source ${SPACK_ROOT}/share/spack/setup-env.sh"
@@ -111,7 +114,7 @@ cmd "module purge"
 cmd "module unuse ${MODULEPATH}"
 cmd "module use ${BASE_DIR}/compilers/modules"
 cmd "module use ${BASE_DIR}/utilities/modules"
-cmd "module load bison bc bzip2 binutils curl patch git python texinfo unzip wget"
+cmd "module load bison bzip2 binutils curl git python texinfo unzip wget"
 # Can't always load flex or texlive or some things fail
 if [ "${TYPE}" == 'utilities' ]; then
   cmd "module load flex texlive"
@@ -120,8 +123,8 @@ elif [ "${TYPE}" == 'software' ]; then
 fi
 
 cmd "source ${SPACK_ROOT}/share/spack/setup-env.sh"
-#cmd "spack compilers"
-#cmd "spack arch"
+cmd "spack compilers"
+cmd "spack arch"
 
 if [ "${MACHINE}" == 'eagle' ]; then
   printf "\nMaking and setting TMPDIR to disk...\n"
@@ -145,11 +148,11 @@ fi
 printf "\nSetting permissions...\n"
 if [ "${MACHINE}" == 'eagle' ]; then
   # Need to create a blank .version for name/version splitting for lmod
-  #cd ${INSTALL_DIR}/${DATE}/share/spack/modules/linux-centos7-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} && find . -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -I % touch %/.version
-  #if [ "${TYPE}" != 'software' ]; then
-  #  cd ${INSTALL_DIR}/${DATE}/share/spack/modules/linux-centos7-${CPU_OPT}/intel-${INTEL_COMPILER_VERSION} && find . -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -I % touch %/.version
-  #  cd ${INSTALL_DIR}/${DATE}/share/spack/modules/linux-centos7-${CPU_OPT}/clang-${CLANG_COMPILER_VERSION} && find . -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -I % touch %/.version
-  #fi
+  cd ${INSTALL_DIR}/${DATE}/share/spack/modules/linux-centos7-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} && find . -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -I % touch %/.version
+  if [ "${TYPE}" == 'software' ]; then
+    cd ${INSTALL_DIR}/${DATE}/share/spack/modules/linux-centos7-${CPU_OPT}/intel-${INTEL_COMPILER_VERSION} && find . -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -I % touch %/.version
+    cd ${INSTALL_DIR}/${DATE}/share/spack/modules/linux-centos7-${CPU_OPT}/clang-${CLANG_COMPILER_VERSION} && find . -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -I % touch %/.version
+  fi
   cmd "nice -n 19 ionice -c 3 chmod -R a+rX,go-w ${INSTALL_DIR}"
   cmd "nice -n 19 ionice -c 3 chgrp -R n-ecom ${INSTALL_DIR}"
 elif [ "${MACHINE}" == 'rhodes' ]; then
