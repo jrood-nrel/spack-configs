@@ -4,6 +4,13 @@
 # The idea of this script requires running each TYPE stage and manually intervening after stage to set
 # up for the next stage by editing the yaml files used in the next stage.
 
+#SBATCH -J build-modules
+#SBATCH -o %x.o%j
+#SBATCH -t 08:00:00
+#SBATCH -N 1
+#SBATCH -p standard
+#SBATCH -A hpcapps
+
 #TYPE=base
 TYPE=compilers
 #TYPE=utilities
