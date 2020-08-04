@@ -9,6 +9,8 @@ packages:
     variants: +osmesa~python+python3+essentials+extras+rendering
   cmake:
     version: [3.17.3]
+  emacs:
+    variants: +tls
   fftw:
     variants: +fma
   gcc:
