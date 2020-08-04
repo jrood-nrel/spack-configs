@@ -2,7 +2,7 @@ packages:
   mesa:
     variants: +opengl +glx swr=skx
   llvm:
-    variants: +cuda cuda_arch=70
+    variants: +omp_debug+omp_tsan+cuda cuda_arch=70 build_type=Release
   slurm:
     paths:
       slurm@19.05.2: /nopt/slurm/current

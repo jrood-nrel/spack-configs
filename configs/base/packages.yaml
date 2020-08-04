@@ -29,19 +29,19 @@ packages:
   libxml2:
     version: [2.9.8]
   llvm:
-    variants: +omp_debug+omp_tsan+python
+    variants: +omp_debug+omp_tsan+python build_type=Release
   nalu-wind:
-    variants: +openfast+tioga+hypre+fftw
+    variants: +openfast+tioga+hypre+fftw build_type=Release
   netcdf-c:
     version: [4.7.3]
     variants: +parallel-netcdf maxdims=65536 maxvars=524288
   openfast:
     version: [develop]
-    variants: +cxx
+    variants: +cxx build_type=Release
   openmpi:
     version: [4.0.4]
   paraview:
-    variants: +python3~python+osmesa
+    variants: +python3~python+osmesa build_type=Release
   python:
     version: [3.7.7]
   py-yt:
@@ -55,7 +55,7 @@ packages:
   netlib-lapack:
     version: [3.8.0]
   sensei:
-    variants: +catalyst+hdf5+python
+    variants: +catalyst+hdf5+python build_type=Release
   superlu:
     version: [4.3]
   texlive:
