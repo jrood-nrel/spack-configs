@@ -6,9 +6,9 @@
 
 #SBATCH -J build-modules
 #SBATCH -o %x.o%j
-#SBATCH -t 08:00:00
+#SBATCH -t 04:00:00
 #SBATCH -N 1
-#SBATCH -p standard
+#SBATCH -p short
 #SBATCH -A hpcapps
 
 #TYPE=base
@@ -143,7 +143,10 @@ printf "\nInstalling ${TYPE}...\n"
 
 cmd "spack env activate ${TYPE}"
 cmd "spack concretize -f"
-cmd "nice spack install"
+for i in {1..4}; do
+  spack install -j 36 &
+done
+wait
 
 printf "\nDone installing ${TYPE} at $(date).\n"
 
