@@ -22,12 +22,11 @@ packages:
     version: [2.18.2]
     variants: +int64~superlu-dist
   intel-parallel-studio:
-    version: [cluster.2020.2]
     variants: +advisor+inspector+itac+mkl+vtune
   intel-mpi:
-    version: [2018.4.274]
+    version: [2019.8.254]
   intel-mkl:
-    version: [2018.4.274]
+    version: [2020.1.217]
   libxml2:
     version: [2.9.8]
   llvm:
@@ -74,7 +73,7 @@ packages:
   zsh:
     version: [5.7.1]
   all:
-    compiler: [apple-clang, gcc@8.4.0, intel@18.0.4, clang]
+    compiler: [apple-clang, gcc@8.4.0, intel@20.0.2, clang]
     variants: build_type=Release +mpi
     providers:
       mpi: [openmpi, intel-mpi]
