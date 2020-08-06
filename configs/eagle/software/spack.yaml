@@ -27,8 +27,8 @@ spack:
   - sundials
   - amrvis dims=3
   - amrvis+profiling dims=2
-  - paraview
-  - sensei
+  - paraview ^llvm@8.0.0 ~cuda cuda_arch=none
+  - sensei ^llvm@8.0.0 ~cuda cuda_arch=none
   - nalu-wind~catalyst
   - nalu-wind~catalyst %intel ^intel-mpi
   - nalu-wind~catalyst %clang
