@@ -14,7 +14,7 @@ packages:
   cudnn:
     version: [7.6.5.32-10.1-linux-x64]
   openmpi:
-    variants: +pmi +cuda fabrics=verbs schedulers=slurm legacylaunchers=true
+    variants: +pmi +cuda fabrics=verbs schedulers=slurm legacylaunchers=true ~vt
   mpich:
     variants: netmod=ucx device=ch4 +slurm +hydra
   py-horovod:

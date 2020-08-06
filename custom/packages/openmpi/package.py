@@ -255,7 +255,7 @@ class Openmpi(AutotoolsPackage):
 
     depends_on('pkgconfig', type='build')
 
-    depends_on('hwloc')
+    depends_on('hwloc@2:', when='@4:')
     # ompi@:3.0.0 doesn't support newer hwloc releases:
     # "configure: error: OMPI does not currently support hwloc v2 API"
     # Future ompi releases may support it, needs to be verified.
@@ -393,7 +393,7 @@ class Openmpi(AutotoolsPackage):
         opt = 'verbs' if self.spec.satisfies('@1.7:') else 'openib'
         if not activated:
             return '--without-{0}'.format(opt)
-        return '--with-{0}={1}'.format(opt, self.spec['rdma-core'].prefix)
+        return '--with-{0}={1}'.format(opt, '/usr')
 
     def with_or_without_mxm(self, activated):
         if not activated:
@@ -465,7 +465,9 @@ class Openmpi(AutotoolsPackage):
 
     def configure_args(self):
         spec = self.spec
+
         config_args = [
+            '--without-usnic',
             '--enable-shared',
             '--disable-silent-rules'
         ]
