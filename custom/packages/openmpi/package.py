@@ -187,7 +187,7 @@ class Openmpi(AutotoolsPackage):
             ('psm', 'psm2', 'verbs',
              'mxm', 'ucx', 'ofi',
              'fca', 'hcoll',
-             'xpmem', 'cma', 'knem')  # shared memory transports
+             'xpmem', 'cma')  # shared memory transports
         ).with_non_feature_values('auto', 'none'),
         description="List of fabrics that are enabled; "
                     "'auto' lets openmpi determine",
@@ -281,7 +281,6 @@ class Openmpi(AutotoolsPackage):
     depends_on('fca', when='fabrics=fca')
     depends_on('hcoll', when='fabrics=hcoll')
     depends_on('xpmem', when='fabrics=xpmem')
-    depends_on('knem', when='fabrics=knem')
 
     depends_on('lsf', when='schedulers=lsf')
     depends_on('openpbs', when='schedulers=tm')
@@ -313,8 +312,6 @@ class Openmpi(AutotoolsPackage):
     conflicts('fabrics=xpmem', when='@:1.6')
     # cma support was added in 1.7
     conflicts('fabrics=cma', when='@:1.6')
-    # knem support was added in 1.5
-    conflicts('fabrics=knem', when='@:1.4')
 
     conflicts('schedulers=slurm ~pmi', when='@1.5.4:',
               msg='+pmi is required for openmpi(>=1.5.5) to work with SLURM.')
@@ -427,11 +424,6 @@ class Openmpi(AutotoolsPackage):
         if not activated:
             return '--without-xpmem'
         return '--with-xpmem={0}'.format(self.spec['xpmem'].prefix)
-
-    def with_or_without_knem(self, activated):
-        if not activated:
-            return '--without-knem'
-        return '--with-knem={0}'.format(self.spec['knem'].prefix)
 
     def with_or_without_lsf(self, activated):
         if not activated:
