@@ -12,9 +12,9 @@
 #SBATCH -A hpcapps
 
 #TYPE=base
-TYPE=compilers
+#TYPE=compilers
 #TYPE=utilities
-#TYPE=software
+TYPE=software
 
 DATE=2020-07
 
@@ -119,8 +119,13 @@ fi
 printf "\nLoading modules...\n"
 cmd "module purge"
 cmd "module unuse ${MODULEPATH}"
-cmd "module use ${BASE_DIR}/compilers/modules"
-cmd "module use ${BASE_DIR}/utilities/modules"
+if [ "${TYPE}" != 'software' ]; then
+  cmd "module use ${BASE_DIR}/compilers/modules"
+  cmd "module use ${BASE_DIR}/utilities/modules"
+elif [ "${TYPE}" == 'software' ]; then
+  cmd "module use ${BASE_DIR}/compilers/modules-${DATE}"
+  cmd "module use ${BASE_DIR}/utilities/modules-${DATE}"
+fi
 cmd "module load bison bzip2 binutils curl git python texinfo unzip wget"
 # Can't always load flex or texlive or some things fail
 if [ "${TYPE}" == 'utilities' ]; then
@@ -143,10 +148,10 @@ printf "\nInstalling ${TYPE}...\n"
 
 cmd "spack env activate ${TYPE}"
 cmd "spack concretize -f"
-for i in {1..4}; do
-  spack install -j 36 &
-done
-wait
+#for i in {1..4}; do
+cmd "spack install -j 64"
+#done
+#wait
 
 printf "\nDone installing ${TYPE} at $(date).\n"
 
@@ -177,12 +182,8 @@ fi
 printf "\n$(date)\n"
 printf "\nDone!\n"
 
-# Last step for compilers
-# Edit compilers.yaml.software to point to all compilers this script installed
-# Edit intel-parallel-studio modules to set INTEL_LICENSE_FILE correctly
-# Edit pgi modules to set PGROUPD_LICENSE_FILE correctly
-# It's possible the PGI compiler needs a libnuma.so.1.0.0 copied into its lib directory and symlinked to libnuma.so and libnuma.so.1
-# Copy libnuma.so.1.0.0 into PGI lib directory and symlink to libnuma.so and libnuma.so.1
+# Some other info:
+# Edit software/compilers.yaml to point to all compilers this script installed in the compilers build phase
 # Run makelocalrc for all PGI compilers (I think this sets a GCC to use as a frontend)
 # I did something like:
 # makelocalrc -gcc /nopt/nrel/ecom/hpacf/compilers/2019-05-08/spack/opt/spack/linux-centos7-x86_64/gcc-4.8.5/gcc-7.4.0-srw2azby5tn7wozbchryvj5ak3zlfz3r/bin/gcc -gpp /nopt/nrel/ecom/hpacf/compilers/2019-05-08/spack/opt/spack/linux-centos7-x86_64/gcc-4.8.5/gcc-7.4.0-srw2azby5tn7wozbchryvj5ak3zlfz3r/bin/g++ -g77 /nopt/nrel/ecom/hpacf/compilers/2019-05-08/spack/opt/spack/linux-centos7-x86_64/gcc-4.8.5/gcc-7.4.0-srw2azby5tn7wozbchryvj5ak3zlfz3r/bin/gfortran -x
