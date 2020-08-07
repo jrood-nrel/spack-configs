@@ -187,7 +187,7 @@ class Openmpi(AutotoolsPackage):
             ('psm', 'psm2', 'verbs',
              'mxm', 'ucx', 'ofi',
              'fca', 'hcoll',
-             'xpmem', 'cma')  # shared memory transports
+             'xpmem', 'cma', 'knem')  # shared memory transports
         ).with_non_feature_values('auto', 'none'),
         description="List of fabrics that are enabled; "
                     "'auto' lets openmpi determine",
@@ -221,6 +221,8 @@ class Openmpi(AutotoolsPackage):
     variant('gpfs', default=True, description='Enable GPFS support (if present)')
     variant('singularity', default=False,
             description="Build support for the Singularity container")
+    variant('lustre', default=False,
+            description="Lustre filesystem library support")
     # Adding support to build a debug version of OpenMPI that activates
     # Memchecker, as described here:
     #
@@ -260,7 +262,7 @@ class Openmpi(AutotoolsPackage):
     # "configure: error: OMPI does not currently support hwloc v2 API"
     # Future ompi releases may support it, needs to be verified.
     # See #7483 for context.
-    depends_on('hwloc@:1.999', when='@:3.9')
+    depends_on('hwloc@:1.999')
 
     depends_on('hwloc +cuda', when='+cuda')
     depends_on('java', when='+java')
@@ -269,6 +271,7 @@ class Openmpi(AutotoolsPackage):
     depends_on('valgrind~mpi', when='+memchecker')
     # Singularity release 3 works better
     depends_on('singularity@3.0.0:', when='+singularity')
+    depends_on('lustre', when='+lustre')
 
     depends_on('opa-psm2', when='fabrics=psm2')
     depends_on('rdma-core', when='fabrics=verbs')
@@ -281,6 +284,7 @@ class Openmpi(AutotoolsPackage):
     depends_on('fca', when='fabrics=fca')
     depends_on('hcoll', when='fabrics=hcoll')
     depends_on('xpmem', when='fabrics=xpmem')
+    depends_on('knem', when='fabrics=knem')
 
     depends_on('lsf', when='schedulers=lsf')
     depends_on('openpbs', when='schedulers=tm')
@@ -312,6 +316,8 @@ class Openmpi(AutotoolsPackage):
     conflicts('fabrics=xpmem', when='@:1.6')
     # cma support was added in 1.7
     conflicts('fabrics=cma', when='@:1.6')
+    # knem support was added in 1.5
+    conflicts('fabrics=knem', when='@:1.4')
 
     conflicts('schedulers=slurm ~pmi', when='@1.5.4:',
               msg='+pmi is required for openmpi(>=1.5.5) to work with SLURM.')
@@ -390,7 +396,7 @@ class Openmpi(AutotoolsPackage):
         opt = 'verbs' if self.spec.satisfies('@1.7:') else 'openib'
         if not activated:
             return '--without-{0}'.format(opt)
-        return '--with-{0}={1}'.format(opt, '/usr')
+        return '--with-{0}={1}'.format(opt, self.spec['rdma-core'].prefix)
 
     def with_or_without_mxm(self, activated):
         if not activated:
@@ -425,6 +431,11 @@ class Openmpi(AutotoolsPackage):
             return '--without-xpmem'
         return '--with-xpmem={0}'.format(self.spec['xpmem'].prefix)
 
+    def with_or_without_knem(self, activated):
+        if not activated:
+            return '--without-knem'
+        return '--with-knem={0}'.format(self.spec['knem'].prefix)
+
     def with_or_without_lsf(self, activated):
         if not activated:
             return '--without-lsf'
@@ -457,9 +468,7 @@ class Openmpi(AutotoolsPackage):
 
     def configure_args(self):
         spec = self.spec
-
         config_args = [
-            '--without-usnic',
             '--enable-shared',
             '--disable-silent-rules'
         ]
@@ -530,8 +539,13 @@ class Openmpi(AutotoolsPackage):
 
         # Singularity container support
         if spec.satisfies('+singularity @:4.9'):
-            singularity_opt = '--with-singularity={0}'.format(spec['singularity'].prefix)
+            singularity_opt = '--with-singularity={0}'.format(
+                spec['singularity'].prefix)
             config_args.append(singularity_opt)
+        # Lustre filesystem support
+        if spec.satisfies('+lustre'):
+            lustre_opt = '--with-lustre={0}'.format(spec['lustre'].prefix)
+            config_args.append(lustre_opt)
         # Hwloc support
         if spec.satisfies('@1.5.2:'):
             config_args.append('--with-hwloc={0}'.format(spec['hwloc'].prefix))
