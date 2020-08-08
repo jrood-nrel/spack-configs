@@ -6,6 +6,6 @@ packages:
   py-horovod:
     variants: tensor_ops=mpi frameworks=pytorch,tensorflow
   py-tensorflow:
-    variants: ~cuda ~nccl
+    variants: ~cuda ~nccl +mpi
   py-torch:
     variants: ~cuda ~cudnn ~nccl

@@ -20,7 +20,7 @@ packages:
   py-horovod:
     variants: tensor_ops=mpi frameworks=pytorch,tensorflow
   py-tensorflow:
-    variants: +cuda cuda_arch=70 +nccl
+    variants: +cuda cuda_arch=70 +mpi +nccl
   py-torch:
     variants: +cuda cuda_arch=70 +cudnn +nccl
   fftw:
