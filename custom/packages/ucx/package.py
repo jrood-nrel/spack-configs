@@ -57,14 +57,9 @@ class Ucx(AutotoolsPackage, CudaPackage):
     depends_on('rdma-core')
     depends_on('gdrcopy@1.3')
     depends_on('cuda')
+    depends_on('binutils')
 
-    @property
-    def configure_abs_path(self):
-        # Absolute path to configure
-        configure_abs_path = os.path.join(
-            os.path.abspath(self.configure_directory), 'contrib/configure-release'
-        )
-        return configure_abs_path
+    configure_abs_path = 'contrib/configure-release'
 
     def configure_args(self):
         args = []
