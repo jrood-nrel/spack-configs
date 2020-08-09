@@ -11,3 +11,5 @@ modules:
       environment:
         set:
           '{name}_ROOT_DIR': '{prefix}'
+    #^python:
+    #  autoload: 'direct'
