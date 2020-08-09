@@ -19,6 +19,7 @@ class Mpich(AutotoolsPackage):
     list_depth = 1
 
     version('develop', submodules=True)
+    version('3.3.2', '4bfaf8837a54771d3e4922c84071ef80ffebddbb6971a006038d91ee7ef959b9')
     version('3.3.1', 'fe551ef29c8eea8978f679484441ed8bb1d943f6ad25b63c235d4b9243d551e5')
     version('3.3',   '574af413dc0dc7fbb929a761822beb06')
     version('3.2.1', 'e175452f4d61646a52c73031683fc375')
