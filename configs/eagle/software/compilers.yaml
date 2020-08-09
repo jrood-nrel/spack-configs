@@ -103,9 +103,9 @@ compilers:
      - /nopt/nrel/ecom/hpacf/compilers/2019-05-08/spack/opt/spack/linux-centos7-x86_64/gcc-4.8.5/intel-parallel-studio-cluster.2018.4-3j7jzdulz4afhdn72kyo72yxrq3blshb/compilers_and_libraries/linux/lib/intel64
      #- /nopt/nrel/ecom/hpacf/compilers/2020-07/spack/opt/spack/linux-centos7-skylake_avx512/gcc-8.4.0/gcc-8.4.0-2a3vha6hlw4xc5ja3jyhr7huzaxuw2kt/lib64
     #flags:
-    #  cflags: -O2 -xCORE-AVX2
-    #  cxxflags: -O2 -xCORE-AVX2
-    #  fflags: -O2 -xCORE-AVX2
+    #  cflags: -xSKYLAKE-AVX512
+    #  cxxflags: -xSKYLAKE-AVX512
+    #  fflags: -xSKYLAKE-AVX512
     modules: []
     operating_system: centos7
     paths:
@@ -123,9 +123,9 @@ compilers:
      - /nopt/nrel/ecom/hpacf/compilers/2020-07/spack/opt/spack/linux-centos7-skylake_avx512/gcc-8.4.0/intel-parallel-studio-cluster.2019.5-qlb5jj5e3kx4q34unx4oyq2oldsuyx6y/compilers_and_libraries/linux/lib/intel64
      #- /nopt/nrel/ecom/hpacf/compilers/2020-07/spack/opt/spack/linux-centos7-skylake_avx512/gcc-8.4.0/gcc-8.4.0-2a3vha6hlw4xc5ja3jyhr7huzaxuw2kt/lib64
     #flags:
-    #  cflags: -O2 -xCORE-AVX2
-    #  cxxflags: -O2 -xCORE-AVX2
-    #  fflags: -O2 -xCORE-AVX2
+    #  cflags: -xSKYLAKE-AVX512
+    #  cxxflags: -xSKYLAKE-AVX512
+    #  fflags: -xSKYLAKE-AVX512
     modules: []
     operating_system: centos7
     paths:
@@ -143,9 +143,9 @@ compilers:
      - /nopt/nrel/ecom/hpacf/compilers/2020-07/spack/opt/spack/linux-centos7-skylake_avx512/gcc-8.4.0/intel-parallel-studio-cluster.2020.2-yroifstc3gpxerjxgfasbrbrvjqv7r22/compilers_and_libraries/linux/lib/intel64
      #- /nopt/nrel/ecom/hpacf/compilers/2020-07/spack/opt/spack/linux-centos7-skylake_avx512/gcc-8.4.0/gcc-8.4.0-2a3vha6hlw4xc5ja3jyhr7huzaxuw2kt/lib64
     #flags:
-    #  cflags: -O2 -xCORE-AVX2
-    #  cxxflags: -O2 -xCORE-AVX2
-    #  fflags: -O2 -xCORE-AVX2
+    #  cflags: -xSKYLAKE-AVX512
+    #  cxxflags: -xSKYLAKE-AVX512
+    #  fflags: -xSKYLAKE-AVX512
     modules: []
     operating_system: centos7
     paths:
