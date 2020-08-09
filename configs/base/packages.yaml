@@ -42,7 +42,7 @@ packages:
   openmpi:
     version: [4.0.4]
   paraview:
-    variants: +python3~python+osmesa build_type=Release
+    variants: +hdf5+python3~python+osmesa build_type=Release
   python:
     version: [3.7.7]
   py-yt:
