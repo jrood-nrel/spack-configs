@@ -55,11 +55,15 @@ class Ucx(AutotoolsPackage, CudaPackage):
 
     depends_on('numactl')
     depends_on('rdma-core')
-    depends_on('gdrcopy@1.3')
-    depends_on('cuda')
     depends_on('binutils')
+    depends_on('gdrcopy@1.3', when='+gdrcopy')
+    conflicts('+gdrcopy', when='~cuda',
+              msg='gdrcopy currently requires cuda support')
 
     configure_abs_path = 'contrib/configure-release'
+
+    def setup_build_environment(self, env):
+        env.set("CXXFLAGS", "-std=c++14")
 
     def configure_args(self):
         args = []
@@ -75,10 +79,20 @@ class Ucx(AutotoolsPackage, CudaPackage):
         args.append('--with-rc')
         args.append('--with-ud')
         args.append('--with-dc')
-        args.append('--with-cm')
+        #args.append('--with-cm')
         args.append('--with-mlx5-dv')
         args.append('--with-ib-hw-tm')
-        args.append('--with-cuda={0}'.format(self.spec['cuda'].prefix))
-        args.append('--with-gdrcopy={0}'.format(self.spec['gdrcopy'].prefix))
+
+        if '+cuda' in self.spec:
+            args.append('--with-cuda={0}'.format(
+                self.spec['cuda'].prefix))
+        else:
+            args.append('--without-cuda')
+
+        if '+gdrcopy' in self.spec:
+            args.append('--with-gdrcopy={0}'.format(
+                self.spec['gdrcopy'].prefix))
+        else:
+            args.append('--without-gdrcopy')
 
         return args

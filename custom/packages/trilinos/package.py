@@ -51,6 +51,8 @@ class Trilinos(CMakePackage):
     version('11.14.2', sha256='f22b2b0df7b88e28b992e19044ba72b845292b93cbbb3a948488199647381119')
     version('11.14.1', sha256='f10fc0a496bf49427eb6871c80816d6e26822a39177d850cc62cf1484e4eec07')
 
+    #generator = 'Ninja'
+
     # ###################### Variants ##########################
 
     # Other
@@ -371,6 +373,7 @@ class Trilinos(CMakePackage):
     depends_on('python', when='+python')
     depends_on('py-numpy', when='+python', type=('build', 'run'))
     depends_on('swig', when='+python')
+    #depends_on('ninja', type=('build'))
 
     # Dependencies/conflicts when MPI is disabled
     depends_on('hdf5~mpi', when='+hdf5~mpi')
@@ -428,8 +431,8 @@ class Trilinos(CMakePackage):
             define('Trilinos_ENABLE_TESTS', False),
             define('Trilinos_ENABLE_EXAMPLES', False),
             define('Trilinos_ENABLE_CXX11', True),
-            self.define_from_variant('BUILD_SHARED_LIBS', 'shared'),
-            define_trilinos_enable('DEBUG', 'debug'),
+            #self.define_from_variant('BUILD_SHARED_LIBS', 'shared'),
+            #define_trilinos_enable('DEBUG', 'debug'),
             # The following can cause problems on systems that don't have
             # static libraries available for things like dl and pthreads
             # for example when trying to build static libs

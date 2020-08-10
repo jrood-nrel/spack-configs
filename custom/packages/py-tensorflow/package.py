@@ -518,8 +518,8 @@ class PyTensorflow(Package, CudaPackage):
         #       ])
         #       to not be nfs. This is only valid for Linux and we'd like to
         #       stay at least also OSX compatible
-        tmp_path = env.get("TMPDIR")
-        #mkdirp(tmp_path)
+        tmp_path = '/scratch/jrood/.tmp/tf'
+        mkdirp(tmp_path)
         env.set('TEST_TMPDIR', tmp_path)
 
         env.set('TF_SYSTEM_LIBS', 'com_google_protobuf')
