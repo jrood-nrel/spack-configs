@@ -30,6 +30,9 @@ spack:
   - paraview
   - sensei
   - nalu-wind~catalyst
+  - intel-mkl %intel
+  - osu-micro-benchmarks %intel ^intel-mpi
   - nalu-wind~catalyst %intel ^intel-mpi
   - nalu-wind~catalyst %clang
+  - osu-micro-benchmarks %clang
   view: false

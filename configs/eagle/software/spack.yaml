@@ -25,11 +25,13 @@ spack:
   - nccmp
   - netcdf-fortran
   - sundials
-  - amrvis dims=3
-  - amrvis+profiling dims=2
   - paraview ^llvm@8.0.0 ~cuda cuda_arch=none
-  - sensei ^llvm@8.0.0 ~cuda cuda_arch=none
-  - nalu-wind~catalyst
+  - amrvis dims=3
+  - amrvis dims=2
+  - osu-micro-benchmarks %intel ^intel-mpi
   - nalu-wind~catalyst %intel ^intel-mpi
-  - nalu-wind~catalyst %clang
+  - intel-mkl %intel
+  - osu-micro-benchmarks %clang ^openmpi ~cuda ^hwloc ~cuda
+  - nalu-wind~catalyst
+  - nalu-wind~catalyst %clang ^openmpi ~cuda ^hwloc ~cuda
   view: false
