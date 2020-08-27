@@ -17,7 +17,7 @@ To use these modules you can add the following to your `~/.bashrc` for example a
 ```
 #------------------------------------------
 
-#OpenMPI 4.0.4
+#MPT 2.22
 #MODULES=modules-2020-07
 #COMPILER=gcc-8.4.0
 #COMPILER=clang-10.0.0
@@ -59,7 +59,6 @@ module use /nopt/nrel/ecom/hpacf/software/${MODULES}/${COMPILER}
 module load gcc
 module load git
 module load python
-module load mpich
 #etc...
 
 #------------------------------------------
