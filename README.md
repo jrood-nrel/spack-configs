@@ -1,6 +1,6 @@
 # Spack configuration files and scripts for use on machines at NREL
 
-These software installations are maintained by Jon Rood for the HPACF group at NREL and are tailored to the applications our group develops. They are open to anyone to use on our machines. The software installations are organized by date snapshots. The binaries, compilers, and utilties are not updated as often as the software modules, so dated symlinks might point to older dates for those. However, each date snapshot of the modules should be able to stand on its own so that older snapshots can be purged safely over time.
+These software installations are maintained by Jon Rood for the HPACF group at NREL and are tailored to the applications our group develops. The list of available modules can be seen in [modules.txt](modules.txt). They are open to anyone to use on our machines. The software installations are organized by date snapshots. The binaries, compilers, and utilties are not updated as often as the software modules, so dated symlinks might point to older dates for those. However, each date snapshot of the modules should be able to stand on its own so that older snapshots can be purged safely over time.
 
 - "base" is just a newer version of GCC to replace the system GCC 4.8.5 which is far too old to build many recent projects.
 - "binaries" are generally the binary downloads of Paraview and Visit.
