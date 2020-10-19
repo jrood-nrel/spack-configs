@@ -26,6 +26,8 @@ spack:
   - netcdf-fortran
   - sundials
   - paraview ^llvm@8.0.0 ~cuda cuda_arch=none
+  - scotch
+  - parmetis
   - amrvis dims=3
   - amrvis dims=2
   - osu-micro-benchmarks %intel ^intel-mpi

@@ -27,6 +27,8 @@ spack:
   - sundials
   - amrvis dims=3
   - amrvis+profiling dims=2
+  - scotch
+  - parmetis
   - paraview
   - sensei
   - nalu-wind~catalyst
