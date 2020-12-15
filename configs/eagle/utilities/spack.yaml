@@ -18,6 +18,7 @@ spack:
   - libxml2
   - likwid
   - ninja
+  - mercurial
   - makedepend
   - patch
   - pkg-config
