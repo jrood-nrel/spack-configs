@@ -10,7 +10,7 @@ packages:
   hwloc:
     variants: +cuda
   cuda:
-    version: [10.1.243]
+    version: [10.2.89]
   cudnn:
     version: [7.6.5.32-10.1-linux-x64]
   openmpi:
