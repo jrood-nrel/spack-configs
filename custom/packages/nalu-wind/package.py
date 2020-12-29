@@ -6,7 +6,7 @@ from shutil import copyfile
 
 class NaluWind(bNaluWind, CudaPackage):
     depends_on('kokkos-nvcc-wrapper', when='+cuda')
-    depends_on('trilinos+cuda', when='+cuda')
+    depends_on('trilinos+cuda+wrapper+cuda_rdc', when='+cuda')
 
     for val in CudaPackage.cuda_arch_values:
         arch_string='cuda_arch={arch}'.format(arch=val)
