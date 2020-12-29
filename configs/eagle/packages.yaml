@@ -11,7 +11,11 @@ packages:
   hwloc:
     variants: +cuda
   cuda:
+    buildable: false
     version: [10.2.89]
+    externals:
+    - spec: cuda@10.2.89
+      prefix: /nopt/nrel/ecom/hpacf/compilers/2020-07/spack/opt/spack/linux-centos7-skylake_avx512/gcc-8.4.0/cuda-10.2.89-rmccd4tpc5gxbbrjeeohphuuujb4cz2o
   cudnn:
     version: [7.6.5.32-10.1-linux-x64]
   openmpi:
