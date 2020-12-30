@@ -10,6 +10,9 @@ packages:
       prefix: /nopt/slurm/current
   hwloc:
     variants: +cuda
+  hypre:
+    version: [develop]
+    variants: +int64~superlu-dist
   cuda:
     buildable: false
     version: [10.2.89]
