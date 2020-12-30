@@ -3,7 +3,7 @@ from spack.pkg.builtin.nalu_wind import NaluWind as bNaluWind
 from spack.pkg.builtin.kokkos import Kokkos
 import os
 
-class NaluWind(NaluWind, CudaPackage):
+class NaluWind(bNaluWind, CudaPackage):
     depends_on('kokkos-nvcc-wrapper', when='+cuda')
     depends_on('nccmp')
     for val in CudaPackage.cuda_arch_values:
