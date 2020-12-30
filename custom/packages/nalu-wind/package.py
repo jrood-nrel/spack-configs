@@ -5,9 +5,11 @@ import os
 
 class NaluWind(NaluWind, CudaPackage):
     depends_on('kokkos-nvcc-wrapper', when='+cuda')
-    depends_on('trilinos+cuda+wrapper+cuda_rdc', when='+cuda')
-    depends_on('hypre+cuda~int64', when='+cuda')
     depends_on('nccmp')
+    for val in CudaPackage.cuda_arch_values:
+        arch_string='cuda_arch={arch}'.format(arch=val)
+        depends_on('trilinos+cuda+wrapper+cuda_rdc {arch}'.format(arch=arch_string), when='+cuda')
+        depends_on('hypre+cuda~int64 {arch}'.format(arch=arch_string), when='+cuda')
 
     def setup_build_environment(self, env):
         if '+cuda' in self.spec:
