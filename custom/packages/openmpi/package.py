@@ -262,7 +262,7 @@ class Openmpi(AutotoolsPackage):
     # "configure: error: OMPI does not currently support hwloc v2 API"
     # Future ompi releases may support it, needs to be verified.
     # See #7483 for context.
-    depends_on('hwloc@:1.999')
+    #depends_on('hwloc@:1.999')
 
     depends_on('hwloc +cuda', when='+cuda')
     depends_on('java', when='+java')
