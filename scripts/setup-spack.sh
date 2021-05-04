@@ -64,7 +64,6 @@ if [ "${MACHINE}" == 'eagle' ] || \
   (set -x; cp ${THIS_REPO_DIR}/configs/${MACHINE}/packages.yaml ${SPACK_ROOT}/etc/spack/${OS}/)
   (set -x; cp ${THIS_REPO_DIR}/configs/${MACHINE}/config.yaml ${SPACK_ROOT}/etc/spack/${OS}/)
   (set -x; cp -R ${THIS_REPO_DIR}/custom ${SPACK_ROOT}/var/spack/repos/)
-  (set -x; cp ${THIS_REPO_DIR}/custom/packages/openmpi/package.py ${SPACK_ROOT}/var/spack/repos/builtin/packages/openmpi/package.py)
 
   if [ "${MACHINE}" != 'mac' ]; then
     (set -x; cp ${THIS_REPO_DIR}/configs/${MACHINE}/software/compilers.yaml ${SPACK_ROOT}/etc/spack/)
