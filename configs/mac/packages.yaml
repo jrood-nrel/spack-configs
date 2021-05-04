@@ -9,7 +9,7 @@ packages:
   #  buildable: False
   #python:
   #  paths:
-  #    python@2.7.16: /usr
+  #    python@3.7.7: /usr
   #  buildable: False
   all:
     providers:
