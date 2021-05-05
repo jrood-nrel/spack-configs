@@ -9,3 +9,4 @@ from spack.pkg.builtin.trilinos import Trilinos as bTrilinos
 class Trilinos(bTrilinos):
     generator = 'Ninja'
     depends_on('ninja', type='build')
+    patch('stk_boost_stacktrace.patch', when='@develop')
