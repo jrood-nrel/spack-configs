@@ -26,8 +26,8 @@ class NaluWindDeveloper(bNaluWind):
         if '+tests' in spec:
             options.append(define('ENABLE_TESTS', True))
 
-        if spec['mpi'].name == 'openmpi'
-            options.append(define('MPIEXEC_PREFLAGS','--oversubscribe'))
+        #if spec['mpi'].name == 'openmpi'
+        #    options.append(define('MPIEXEC_PREFLAGS','--oversubscribe'))
 
         return options
 
