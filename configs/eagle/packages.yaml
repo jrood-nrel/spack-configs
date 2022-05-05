@@ -50,8 +50,8 @@ packages:
     compiler: [gcc@8.4.0, intel@18.0.4, clang@10.0.0]
     variants: build_type=Release +mpi
     providers:
-      mpi: [mpt, intel-mpi]
-      blas: [netlib-lapack, intel-mkl]
-      lapack: [netlib-lapack, intel-mkl]
+      mpi: [mpt]
+      blas: [netlib-lapack]
+      lapack: [netlib-lapack]
       gl: [osmesa+opengl]
       glx: [osmesa+glx]

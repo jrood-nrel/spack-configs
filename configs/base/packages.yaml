@@ -16,10 +16,6 @@ packages:
     variants: +int64~superlu-dist
   intel-parallel-studio:
     variants: +advisor+inspector+itac+mkl+vtune
-  intel-mpi:
-    version: [2018.4.274]
-  intel-mkl:
-    version: [2018.4.274]
   llvm:
     variants: +omp_debug+omp_tsan+python build_type=Release
   nalu-wind:
@@ -38,8 +34,6 @@ packages:
     version: [1.12.2]
   sensei:
     variants: +catalyst+hdf5+python build_type=Release
-  superlu:
-    version: [4.3]
   texlive:
     variants: scheme=full
   tioga:
@@ -55,9 +49,9 @@ packages:
     compiler: [gcc, intel, clang]
     variants: build_type=Release +mpi
     providers:
-      mpi: [openmpi, intel-mpi]
-      blas: [netlib-lapack, intel-mkl]
-      lapack: [netlib-lapack, intel-mkl]
+      mpi: [mpich]
+      blas: [netlib-lapack]
+      lapack: [netlib-lapack]
       gl: [osmesa+opengl]
       glx: [osmesa+glx]
 
