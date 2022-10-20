@@ -7,6 +7,7 @@ spack:
   - cppcheck
   - curl
   - flex
+  - ffmpeg
   - flex@2.5.39
   - emacs
   - git
