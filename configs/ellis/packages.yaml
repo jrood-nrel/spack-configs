@@ -1,0 +1,31 @@
+packages:
+  mesa:
+    variants: +opengl +glx swr=skx
+  llvm:
+    variants: +omp_debug+omp_tsan+cuda cuda_arch=80 build_type=Release
+  hwloc:
+    variants: +cuda cuda_arch=80
+  mpich:
+    variants: +cuda cuda_arch=80
+  py-horovod:
+    variants: tensor_ops=mpi frameworks=pytorch,tensorflow
+  py-tensorflow:
+    variants: +cuda cuda_arch=80 +mpi +nccl
+  py-torch:
+    variants: +cuda cuda_arch=80 +cudnn +nccl
+  fftw:
+    variants: +mpi+fma simd=avx512
+  pgi:
+    variants: +nvidia
+  ucx:
+    variants: +optimizations+gdrcopy
+    version: [1.8.1]
+  all:
+    compiler: [gcc@10.4.0, intel@20.0.4, clang@15.0.2]
+    variants: build_type=Release +mpi
+    providers:
+      mpi: [mpich]
+      blas: [netlib-lapack]
+      lapack: [netlib-lapack]
+      gl: [osmesa+opengl]
+      glx: [osmesa+glx]

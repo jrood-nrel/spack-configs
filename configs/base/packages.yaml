@@ -1,6 +1,11 @@
 packages:
   ascent:
-    variants: +python
+    variants: ~fortran~openmp+python
+  boost:
+    version: [1.76.0]
+    variants: cxxstd=14
+  conduit:
+    variants: ~fortran~hdf5_compat
   catalyst:
     variants: +osmesa~python+python3+essentials+extras+rendering
   emacs:
@@ -10,10 +15,10 @@ packages:
   gcc:
     variants: languages=c,c++,fortran,go
   hdf5:
-    version: [1.10.7]
+    version: [1.12.2]
     variants: +cxx+hl
   hypre:
-    variants: +int64~superlu-dist
+    variants: +int64~superlu-dist~fortran
   intel-parallel-studio:
     variants: +advisor+inspector+itac+mkl+vtune
   llvm:
@@ -32,6 +37,7 @@ packages:
     variants: ~astropy
   parallel-netcdf:
     version: [1.12.2]
+    variants: ~fortran
   sensei:
     variants: +catalyst+hdf5+python build_type=Release
   texlive:
@@ -39,8 +45,8 @@ packages:
   tioga:
     version: [develop]
   trilinos:
-    version: [develop]
-    variants: ~adios2~alloptpkgs~amesos+amesos2~anasazi~aztec+belos+boost~cgns~chaco~complex~debug~dtk~epetra~epetraext+exodus+explicit_template_instantiation~float~fortran~fortrilinos+glm+gtest+hdf5~hypre~ifpack+ifpack2~intrepid~intrepid2~isorropia+kokkos~matio~mesquite+metis~minitensor~ml+mpi+muelu~mumps+netcdf~nox~openmp~phalanx~piro+pnetcdf~python~rol~rythmos~sacado+shards~shylu+stk~stratimikos~suite-sparse+superlu~superlu-dist~teko~tempus+teuchos+tpetra~x11~xsdkflags+zlib+zoltan+zoltan2 cxxstd=14 build_type=Release
+    version: [stable, develop]
+    variants: ~adios2~alloptpkgs~amesos+amesos2~anasazi~aztec+belos+boost~chaco~complex~debug~dtk~epetra~epetraext+exodus+explicit_template_instantiation~float~fortran~fortrilinos+glm+gtest+hdf5~hypre~ifpack+ifpack2~intrepid~intrepid2~isorropia+kokkos~mesquite+metis~minitensor~ml+mpi+muelu~mumps~nox~openmp~phalanx~piro~python~rol~rythmos~sacado+shards~shylu+stk~stratimikos~suite-sparse~superlu~superlu-dist~teko~tempus+teuchos+tpetra+uvm~x11~xsdkflags+zlib+zoltan+zoltan2 gotype=long cxxstd=14 build_type=Release
   visit:
     variants: ~gui+hdf5+python+silo+adios2
   vim:
@@ -54,4 +60,3 @@ packages:
       lapack: [netlib-lapack]
       gl: [osmesa+opengl]
       glx: [osmesa+glx]
-
