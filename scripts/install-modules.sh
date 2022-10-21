@@ -115,7 +115,7 @@ if [ ! -d "${INSTALL_DIR}" ]; then
 
   printf "\nCloning Spack repo...\n"
   cmd "git clone https://github.com/spack/spack.git ${SPACK_ROOT}"
-  cmd "cd ${SPACK_ROOT} && git checkout ee721f9c91a614b6dc6bacd3070f50cfeac97015 && cd -"
+  cmd "cd ${SPACK_ROOT} && git checkout 7c3d93465c1d76e084d6b0ce4a44d1c0b4b1ae68 && cd -"
 
   printf "\nConfiguring Spack...\n"
   cmd "cd ${THIS_REPO_DIR}/scripts && ./setup-spack.sh"
