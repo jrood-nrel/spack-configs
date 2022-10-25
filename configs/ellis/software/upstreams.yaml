@@ -1,5 +1,5 @@
 upstreams:
-  spack-compilers:
-    install_tree: /projects/hpacf/apps/compilers/2022-10/spack/opt/spack
   spack-utilities:
     install_tree: /projects/hpacf/apps/utilities/2022-10/spack/opt/spack
+  spack-compilers:
+    install_tree: /projects/hpacf/apps/compilers/2022-10/spack/opt/spack
