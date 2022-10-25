@@ -1,4 +1,6 @@
 packages:
+  cuda:
+    version: [11.4.4]
   mesa:
     variants: +opengl +glx swr=skx
   llvm:
@@ -17,9 +19,6 @@ packages:
     variants: +mpi+fma simd=avx512
   pgi:
     variants: +nvidia
-  ucx:
-    variants: +optimizations+gdrcopy
-    version: [1.8.1]
   all:
     compiler: [gcc@10.4.0, intel@20.0.4, clang@15.0.2]
     variants: build_type=Release +mpi

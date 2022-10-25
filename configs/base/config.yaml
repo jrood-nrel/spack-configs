@@ -1,7 +1,8 @@
 config:
-  install_path_scheme: "${ARCHITECTURE}/${COMPILERNAME}-${COMPILERVER}/${PACKAGE}-${VERSION}-${HASH}"
-  source_cache:
-    - ~/.spack_downloads
-  misc_cache:
-    - $spack/var/spack/cache
+  source_cache: ~/.spack_downloads
+  misc_cache: $spack/var/spack/cache
+  build_stage: $spack/var/spack/stage
   build_jobs: 16
+  install_tree:
+    projections:
+      all: ${ARCHITECTURE}/${COMPILERNAME}-${COMPILERVER}/${PACKAGE}-${VERSION}-${HASH}

@@ -1,15 +1,14 @@
 modules:
-  enable:
-    - tcl
-  tcl:
-    projections:
-      all: '{compiler.name}-{compiler.version}/{name}/{version}/{hash:4}'
-    hash_length: 0
-    all:
-      conflict:
+  default:
+    tcl:
+      projections:
+        all: '{compiler.name}-{compiler.version}/{name}/{version}/{hash:4}'
+      hash_length: 0
+      all:
+        conflict:
         - '{name}'
-      environment:
-        set:
-          '{name}_ROOT_DIR': '{prefix}'
-    whitelist: ['cuda', 'gcc', 'go', 'llvm', 'binutils']
-    blacklist: ['%gcc']
+        environment:
+          set:
+            '{name}_ROOT_DIR': '{prefix}'
+      include: [cuda, gcc, go, llvm, binutils]
+      exclude: ['%gcc']

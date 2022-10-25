@@ -12,8 +12,8 @@
 #SBATCH -A hpcapps
 
 #TYPE=base
-TYPE=compilers
-#TYPE=utilities
+#TYPE=compilers
+TYPE=utilities
 #TYPE=software
 
 DATE=2022-10
@@ -55,7 +55,7 @@ if [ "${MACHINE}" == 'eagle' ]; then
 elif [ "${MACHINE}" == 'rhodes' ]; then
   BASE_DIR=/opt
 elif [ "${MACHINE}" == 'ellis' ]; then
-  BASE_DIR=/projects/hpacf/software
+  BASE_DIR=/projects/hpacf/apps
 else
   printf "\nMachine name not recognized.\n"
   exit 1
@@ -72,7 +72,7 @@ if [ "${TYPE}" == 'base' ]; then
     CPU_OPT=haswell
     HOST_OS=centos7
   elif [ "${MACHINE}" == 'ellis' ]; then
-    CPU_OPT=zen2
+    CPU_OPT=zen
     HOST_OS=rocky8
     GCC_COMPILER_VERSION=8.5.0
   fi
@@ -85,7 +85,7 @@ elif [ "${TYPE}" == 'compilers' ] || [ "${TYPE}" == 'utilities' ] || [ "${TYPE}"
     HOST_OS=centos7
     CPU_OPT=broadwell
   elif [ "${MACHINE}" == 'ellis' ]; then
-    CPU_OPT=zen2
+    CPU_OPT=zen
     HOST_OS=rocky8
   fi
 fi
@@ -102,7 +102,7 @@ THIS_REPO_DIR=$(pwd)/..
 export SPACK_ROOT=${INSTALL_DIR}/spack
 export SPACK_DISABLE_LOCAL_CONFIG=true
 export SPACK_USER_CACHE_PATH=${SPACK_ROOT}/var/spack/user_cache
-export SPACK_USER_CONFIG_PATH=${SPACK_}/var/spack/user_config
+export SPACK_USER_CONFIG_PATH=${SPACK_ROOT}/var/spack/user_config
 
 if [ ! -d "${INSTALL_DIR}" ]; then
   printf "============================================================\n"
@@ -115,7 +115,7 @@ if [ ! -d "${INSTALL_DIR}" ]; then
 
   printf "\nCloning Spack repo...\n"
   cmd "git clone https://github.com/spack/spack.git ${SPACK_ROOT}"
-  cmd "cd ${SPACK_ROOT} && git checkout 7c3d93465c1d76e084d6b0ce4a44d1c0b4b1ae68 && cd -"
+  cmd "cd ${SPACK_ROOT} && git checkout 560a9eec920e1fba3d334c6506d193aa8d9cb098 && cd -"
 
   printf "\nConfiguring Spack...\n"
   cmd "cd ${THIS_REPO_DIR}/scripts && ./setup-spack.sh"
@@ -126,7 +126,9 @@ if [ ! -d "${INSTALL_DIR}" ]; then
     cmd "rm -f ${SPACK_ROOT}/etc/spack/upstreams.yaml || true"
   fi
   cmd "mkdir -p ${SPACK_ROOT}/etc/spack/licenses/intel"
-  cmd "cp ${HOME}/save/license.lic ${SPACK_ROOT}/etc/spack/licenses/intel/"
+  if [ "${MACHINE}" != 'ellis' ]; then
+    cmd "cp ${HOME}/save/license.lic ${SPACK_ROOT}/etc/spack/licenses/intel/"
+  fi
   cmd "source ${SPACK_ROOT}/share/spack/setup-env.sh"
   cmd "spack env create ${TYPE}"
   cmd "cp ${THIS_REPO_DIR}/configs/${MACHINE}/${TYPE}/spack.yaml ${SPACK_ROOT}/var/spack/environments/${TYPE}/spack.yaml"
@@ -170,37 +172,39 @@ fi
 printf "\nInstalling ${TYPE}...\n"
 
 cmd "spack env activate ${TYPE}"
-cmd "spack concretize -f"
-for i in {1..4}; do
-  cmd "spack install" &
-done
-wait
+#cmd "spack concretize -f"
+#for i in {1..4}; do
+#  cmd "spack install --deprecated" #&
+#done
+#wait
+cmd "spack module tcl refresh --upstream-modules -y"
 
 printf "\nDone installing ${TYPE} at $(date).\n"
 
-printf "\nCreating dated modules symlink...\n"
-if [ "${TYPE}" != 'software' ]; then
-  cmd "cd ${INSTALL_DIR}/.. && ln -sf ${DATE}/spack/share/spack/modules/linux-${HOST_OS}-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} modules-${DATE} && cd -"
-fi
+#printf "\nCreating dated modules symlink...\n"
+#if [ "${TYPE}" != 'software' ]; then
+#  cmd "cd ${INSTALL_DIR}/.. && ln -sf ${DATE}/spack/share/spack/modules/linux-${HOST_OS}-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} modules-${DATE} && cd -"
+#  cmd "cd ${INSTALL_DIR}/.. && ln -sf ${DATE}/spack/share/spack/modules/linux-${HOST_OS}-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} modules && cd -"
+#fi
 
-printf "\nSetting permissions...\n"
-if [ "${MACHINE}" == 'eagle' ]; then
-  # Need to create a blank .version for name/version splitting for lmod
-  cd ${INSTALL_DIR}/${DATE}/share/spack/modules/linux-${HOST_OS}-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} && find . -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -I % touch %/.version
-  if [ "${TYPE}" == 'software' ]; then
-    cd ${INSTALL_DIR}/${DATE}/share/spack/modules/linux-${HOST_OS}-${CPU_OPT}/intel-${INTEL_COMPILER_VERSION} && find . -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -I % touch %/.version
-    cd ${INSTALL_DIR}/${DATE}/share/spack/modules/linux-${HOST_OS}-${CPU_OPT}/clang-${CLANG_COMPILER_VERSION} && find . -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -I % touch %/.version
-  fi
-  cmd "nice -n 19 ionice -c 3 chmod -R a+rX,go-w ${INSTALL_DIR}"
-  cmd "nice -n 19 ionice -c 3 chgrp -R n-ecom ${INSTALL_DIR}"
-elif [ "${MACHINE}" == 'rhodes' ]; then
-  cmd "nice -n 19 ionice -c 3 chgrp windsim /opt"
-  cmd "nice -n 19 ionice -c 3 chgrp windsim /opt/${TYPE}"
-  cmd "nice -n 19 ionice -c 3 chgrp -R windsim ${INSTALL_DIR}"
-  cmd "nice -n 19 ionice -c 3 chmod a+rX,go-w /opt"
-  cmd "nice -n 19 ionice -c 3 chmod a+rX,go-w /opt/${TYPE}"
-  cmd "nice -n 19 ionice -c 3 chmod -R a+rX,go-w ${INSTALL_DIR}"
-fi
+#printf "\nSetting permissions...\n"
+#if [ "${MACHINE}" == 'eagle' ]; then
+#  # Need to create a blank .version for name/version splitting for lmod
+#  cd ${INSTALL_DIR}/${DATE}/share/spack/modules/linux-${HOST_OS}-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} && find . -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -I % touch %/.version
+#  if [ "${TYPE}" == 'software' ]; then
+#    cd ${INSTALL_DIR}/${DATE}/share/spack/modules/linux-${HOST_OS}-${CPU_OPT}/intel-${INTEL_COMPILER_VERSION} && find . -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -I % touch %/.version
+#    cd ${INSTALL_DIR}/${DATE}/share/spack/modules/linux-${HOST_OS}-${CPU_OPT}/clang-${CLANG_COMPILER_VERSION} && find . -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -I % touch %/.version
+#  fi
+#  cmd "nice -n 19 ionice -c 3 chmod -R a+rX,go-w ${INSTALL_DIR}"
+#  cmd "nice -n 19 ionice -c 3 chgrp -R n-ecom ${INSTALL_DIR}"
+#elif [ "${MACHINE}" == 'rhodes' ]; then
+#  cmd "nice -n 19 ionice -c 3 chgrp windsim /opt"
+#  cmd "nice -n 19 ionice -c 3 chgrp windsim /opt/${TYPE}"
+#  cmd "nice -n 19 ionice -c 3 chgrp -R windsim ${INSTALL_DIR}"
+#  cmd "nice -n 19 ionice -c 3 chmod a+rX,go-w /opt"
+#  cmd "nice -n 19 ionice -c 3 chmod a+rX,go-w /opt/${TYPE}"
+#  cmd "nice -n 19 ionice -c 3 chmod -R a+rX,go-w ${INSTALL_DIR}"
+#fi
 
 printf "\n$(date)\n"
 printf "\nDone!\n"

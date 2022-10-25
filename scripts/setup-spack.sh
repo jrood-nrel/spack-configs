@@ -34,6 +34,11 @@ elif [ ${OS} == 'Linux' ]; then
       MACHINE=eagle
     ;;
   esac
+  case "${NREL_CLUSTER}" in
+    ellis)
+      MACHINE=ellis
+    ;;
+  esac
   MYHOSTNAME=$(hostname -s)
   case "${MYHOSTNAME}" in
     rhodes)
@@ -44,13 +49,14 @@ fi
 
 # Copy machine-specific configuration for Spack if we recognize the machine
 if [ "${MACHINE}" == 'eagle' ] || \
+   [ "${MACHINE}" == 'ellis' ] || \
    [ "${MACHINE}" == 'rhodes' ] || \
    [ "${MACHINE}" == 'mac' ]; then
 
   printf "Machine is detected as ${MACHINE}.\n"
 
   #Extra stuff for eagle
-  if [ ${MACHINE} == 'eagle' ] || [ ${MACHINE} == 'rhodes' ]; then
+  if [ ${MACHINE} == 'eagle' ] || [ ${MACHINE} == 'rhodes' ] || [ ${MACHINE} == 'ellis' ]; then
     OS=linux
   elif [ "${MACHINE}" == 'mac' ]; then
     OS=darwin
