@@ -84,7 +84,7 @@ compilers:
     extra_rpaths:
      - /projects/hpacf/apps/compilers/2022-10/spack/opt/spack/linux-rocky8-zen/gcc-8.5.0/gcc-12.2.0-z5y2mgpvucctva54jz3mbfnna6mo5jmt/lib64
 - compiler:
-    spec: llvm@12.0.1
+    spec: clang@12.0.1
     paths:
       cc: /projects/hpacf/apps/compilers/2022-10/spack/opt/spack/linux-rocky8-zen/gcc-8.5.0/llvm-12.0.1-3fjkex6plweic5yhnwotaw6jq3p3qugt/bin/clang
       cxx: /projects/hpacf/apps/compilers/2022-10/spack/opt/spack/linux-rocky8-zen/gcc-8.5.0/llvm-12.0.1-3fjkex6plweic5yhnwotaw6jq3p3qugt/bin/clang++
@@ -100,7 +100,7 @@ compilers:
      - /projects/hpacf/apps/compilers/2022-10/spack/opt/spack/linux-rocky8-zen/gcc-8.5.0/llvm-12.0.1-3fjkex6plweic5yhnwotaw6jq3p3qugt/lib/clang/12.0.1/lib/linux
      - /projects/hpacf/apps/compilers/2022-10/spack/opt/spack/linux-rocky8-zen/gcc-8.5.0/gcc-10.4.0-3p6txnggl3gb25woqtbgfckpcti67d6c/lib64
 - compiler:
-    spec: llvm@13.0.1
+    spec: clang@13.0.1
     paths:
       cc: /projects/hpacf/apps/compilers/2022-10/spack/opt/spack/linux-rocky8-zen/gcc-8.5.0/llvm-13.0.1-2k642eh542pduhzvwu5ym5kcsp3efzh4/bin/clang
       cxx: /projects/hpacf/apps/compilers/2022-10/spack/opt/spack/linux-rocky8-zen/gcc-8.5.0/llvm-13.0.1-2k642eh542pduhzvwu5ym5kcsp3efzh4/bin/clang++
@@ -116,7 +116,7 @@ compilers:
      - /projects/hpacf/apps/compilers/2022-10/spack/opt/spack/linux-rocky8-zen/gcc-8.5.0/llvm-13.0.1-2k642eh542pduhzvwu5ym5kcsp3efzh4/lib/clang/13.0.1/lib/linux
      - /projects/hpacf/apps/compilers/2022-10/spack/opt/spack/linux-rocky8-zen/gcc-8.5.0/gcc-10.4.0-3p6txnggl3gb25woqtbgfckpcti67d6c/lib64
 - compiler:
-    spec: llvm@14.0.6
+    spec: clang@14.0.6
     paths:
       cc: /projects/hpacf/apps/compilers/2022-10/spack/opt/spack/linux-rocky8-zen/gcc-8.5.0/llvm-14.0.6-a2mkj6dq6u7gfjgupj6l5wsox42z7ah3/bin/clang
       cxx: /projects/hpacf/apps/compilers/2022-10/spack/opt/spack/linux-rocky8-zen/gcc-8.5.0/llvm-14.0.6-a2mkj6dq6u7gfjgupj6l5wsox42z7ah3/bin/clang++
@@ -132,7 +132,7 @@ compilers:
      - /projects/hpacf/apps/compilers/2022-10/spack/opt/spack/linux-rocky8-zen/gcc-8.5.0/llvm-14.0.6-a2mkj6dq6u7gfjgupj6l5wsox42z7ah3/lib/clang/14.0.6/lib/linux
      - /projects/hpacf/apps/compilers/2022-10/spack/opt/spack/linux-rocky8-zen/gcc-8.5.0/gcc-10.4.0-3p6txnggl3gb25woqtbgfckpcti67d6c/lib64
 - compiler:
-    spec: llvm@15.0.2
+    spec: clang@15.0.2
     paths:
       cc: /projects/hpacf/apps/compilers/2022-10/spack/opt/spack/linux-rocky8-zen/gcc-8.5.0/llvm-15.0.2-ehytehn7zchhfxuhcacpsfe3abdieywe/bin/clang
       cxx: /projects/hpacf/apps/compilers/2022-10/spack/opt/spack/linux-rocky8-zen/gcc-8.5.0/llvm-15.0.2-ehytehn7zchhfxuhcacpsfe3abdieywe/bin/clang++

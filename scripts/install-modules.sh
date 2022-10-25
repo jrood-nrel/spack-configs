@@ -13,8 +13,8 @@
 
 #TYPE=base
 #TYPE=compilers
-TYPE=utilities
-#TYPE=software
+#TYPE=utilities
+TYPE=software
 
 DATE=2022-10
 
@@ -172,19 +172,19 @@ fi
 printf "\nInstalling ${TYPE}...\n"
 
 cmd "spack env activate ${TYPE}"
-#cmd "spack concretize -f"
-#for i in {1..4}; do
-#  cmd "spack install --deprecated" #&
-#done
-#wait
-cmd "spack module tcl refresh --upstream-modules -y"
+cmd "spack concretize -f"
+for i in {1..4}; do
+  cmd "spack install --deprecated" #&
+done
+wait
+cmd "spack module tcl refresh -y"
 
 printf "\nDone installing ${TYPE} at $(date).\n"
 
-#printf "\nCreating dated modules symlink...\n"
+printf "\nCreating dated modules symlink...\n"
 #if [ "${TYPE}" != 'software' ]; then
-#  cmd "cd ${INSTALL_DIR}/.. && ln -sf ${DATE}/spack/share/spack/modules/linux-${HOST_OS}-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} modules-${DATE} && cd -"
-#  cmd "cd ${INSTALL_DIR}/.. && ln -sf ${DATE}/spack/share/spack/modules/linux-${HOST_OS}-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} modules && cd -"
+cmd "cd ${INSTALL_DIR}/.. && ln -sf ${DATE}/spack/share/spack/modules/linux-${HOST_OS}-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} modules-${DATE} && cd -"
+cmd "cd ${INSTALL_DIR}/.. && ln -sf ${DATE}/spack/share/spack/modules/linux-${HOST_OS}-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} modules && cd -"
 #fi
 
 #printf "\nSetting permissions...\n"
