@@ -144,13 +144,14 @@ fi
 #printf "\nLoading modules...\n"
 cmd "module purge"
 cmd "module unuse ${MODULEPATH}"
-#if [ "${TYPE}" != 'software' ]; then
-#  cmd "module use ${BASE_DIR}/compilers/modules"
-#  cmd "module use ${BASE_DIR}/utilities/modules"
-#elif [ "${TYPE}" == 'software' ]; then
-#  cmd "module use ${BASE_DIR}/compilers/modules-${DATE}"
-#  cmd "module use ${BASE_DIR}/utilities/modules-${DATE}"
-#fi
+if [ "${TYPE}" != 'software' ]; then
+  cmd "module use ${BASE_DIR}/compilers/modules"
+  cmd "module use ${BASE_DIR}/utilities/modules"
+elif [ "${TYPE}" == 'software' ]; then
+  cmd "module use ${BASE_DIR}/compilers/modules-${DATE}"
+  cmd "module use ${BASE_DIR}/utilities/modules-${DATE}"
+fi
+cmd "module load binutils"
 #cmd "module load bison bzip2 binutils curl git python texinfo unzip wget"
 ## Can't always load flex or texlive or some things fail
 #if [ "${TYPE}" == 'utilities' ]; then
@@ -172,19 +173,21 @@ fi
 printf "\nInstalling ${TYPE}...\n"
 
 cmd "spack env activate ${TYPE}"
-cmd "spack concretize -f"
-for i in {1..4}; do
-  cmd "spack install --deprecated" #&
-done
-wait
+#cmd "spack concretize -f --fresh"
+#for i in {1..8}; do
+  #cmd "spack install --deprecated --fresh" #&
+#done
+#wait
 cmd "spack module tcl refresh -y"
 
 printf "\nDone installing ${TYPE} at $(date).\n"
 
 printf "\nCreating dated modules symlink...\n"
 #if [ "${TYPE}" != 'software' ]; then
-cmd "cd ${INSTALL_DIR}/.. && ln -sf ${DATE}/spack/share/spack/modules/linux-${HOST_OS}-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} modules-${DATE} && cd -"
-cmd "cd ${INSTALL_DIR}/.. && ln -sf ${DATE}/spack/share/spack/modules/linux-${HOST_OS}-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} modules && cd -"
+#cmd "cd ${INSTALL_DIR}/.. && ln -sf ${DATE}/spack/share/spack/modules/linux-${HOST_OS}-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} modules-${DATE} && cd -"
+#cmd "cd ${INSTALL_DIR}/.. && ln -sf ${DATE}/spack/share/spack/modules/linux-${HOST_OS}-${CPU_OPT}/gcc-${GCC_COMPILER_VERSION} modules && cd -"
+cmd "cd ${INSTALL_DIR}/.. && ln -sf ${DATE}/spack/share/spack/modules/linux-${HOST_OS}-zen2 modules-${DATE} && cd -"
+cmd "cd ${INSTALL_DIR}/.. && ln -sf ${DATE}/spack/share/spack/modules/linux-${HOST_OS}-zen2 modules && cd -"
 #fi
 
 #printf "\nSetting permissions...\n"

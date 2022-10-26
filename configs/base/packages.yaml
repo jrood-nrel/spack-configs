@@ -6,8 +6,8 @@ packages:
     variants: cxxstd=14
   conduit:
     variants: ~fortran~hdf5_compat
-  catalyst:
-    variants: +osmesa~python+python3+essentials+extras+rendering
+  #catalyst:
+  #  variants: +osmesa~python+python3+essentials+extras+rendering
   emacs:
     variants: +tls
   fftw:
@@ -39,8 +39,8 @@ packages:
   parallel-netcdf:
     version: [1.12.2]
     variants: ~fortran
-  sensei:
-    variants: +catalyst+hdf5+python build_type=Release
+  #sensei:
+  #  variants: +catalyst+hdf5+python build_type=Release
   texlive:
     variants: scheme=full
   tioga:
@@ -59,5 +59,5 @@ packages:
       mpi: [mpich]
       blas: [netlib-lapack]
       lapack: [netlib-lapack]
-      gl: [osmesa+opengl]
-      glx: [osmesa+glx]
+      gl: [osmesa~opengl]
+      glx: [osmesa~glx]
